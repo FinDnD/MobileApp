@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApp.Views.RegisterPage">
+    
+    <ContentPage.Content>
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+
+
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="10,10,0,10" Padding="0,50,0,0">
+                <Image Source="dice_Icon.png" VerticalOptions="Center" />
+
+                <Label Text="Discover DnD Parties and Players" Padding="0,20,0,0" FontSize="Large" HorizontalOptions="Center" TextColor="Black" />
+            </StackLayout>
+
+            <Grid VerticalOptions="Center" Grid.Row="1" Margin="20,0,20,0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!--TODO: add error handling for username?-->
+                <!--<Label Grid.Row="1" Text="{Binding Message}" x:Name="lblErrorMsg" IsVisible="False" TextColor="Red" FontSize="15" BackgroundColor="Transparent"></Label>-->
+                <Entry Grid.Row="2" x:Name="userNameEntry" Text="{Binding UserName}" Placeholder="User Name" ReturnType="Next" Keyboard="Text" FontSize="Medium"></Entry>
+                <Entry Grid.Row="3" x:Name="userEmailEntry" Text="{Binding UserEmail}" Placeholder="Email" ReturnType="Next" Keyboard="Email" FontSize="Medium"></Entry>
+                <Entry Grid.Row="4" x:Name="userPassword" Text="{Binding Password}" Placeholder="Password" TextChanged="PasswordEntryTextChanged" ReturnType="Next" IsPassword="True" Keyboard="Text" FontSize="Medium"></Entry>
+                <Entry Grid.Row="5" x:Name="userPasswordConfirmed" Text="{Binding Password}" Placeholder="Confirm Password" TextChanged="PasswordEntryTextChanged" ReturnType="Next" IsPassword="True" Keyboard="Text" FontSize="Medium"></Entry>
+
+                <Button Grid.Row="6" Text="REGISTER" Clicked="RegisterButtonClicked" BackgroundColor="#3897f0" TextColor="White" HeightRequest="50" VerticalOptions="Start" />
+                <Button Grid.Row="7" x:Name="BackToLoginButton" Text="Have an account? Sign In" BackgroundColor="#e3e3e3" TextColor="Black" Clicked="BackToLoginButtonClicked"/>
+
+                <Label Grid.Row="8" Text="By tapping Register, you agree to our Terms and Privacy Policy" FontSize="small"  TextColor="Gray" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="10,10,0,10"/>
+
+            </Grid>
+
+            <Grid VerticalOptions="End" Grid.Row="2">
+                <StackLayout BackgroundColor="white">
+                </StackLayout>
+            </Grid>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

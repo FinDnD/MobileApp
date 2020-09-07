@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Espresso401-MobileApp.Views
+namespace Espresso401_MobileApp.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-public partial class RegisterPage : ContentPage
-{
-    public RegisterPage()
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class RegisterPage : ContentPage
     {
-        InitializeComponent();
+        public RegisterPage()
+        {
+            InitializeComponent();
+        }
     }
-}
 }

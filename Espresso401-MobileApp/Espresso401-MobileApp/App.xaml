@@ -6,6 +6,8 @@
     <!--
         Define global resources and styles here, that apply to all pages in your app.
     -->
+    
+    <!--Test-->
  
     <Application.Resources>
         <ResourceDictionary>

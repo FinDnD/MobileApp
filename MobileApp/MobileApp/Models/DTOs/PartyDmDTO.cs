@@ -3,6 +3,7 @@
     public class PartyDmDTO
     {
         public int Id { get; set; }
+        public string UserName { get; set; }
         public string CampaignName { get; set; }
         public string CampaignDesc { get; set; }
         public string ExperienceLevel { get; set; }

@@ -93,7 +93,10 @@ namespace MobileApp.Views
                     await DisplayAlert("Profile Not Found", "Error fetching profile", "X");
                 }
             }
-            await DisplayAlert("Login Failed", "Invalid Username or Password", "X");
+            else
+            {
+                await DisplayAlert("Login Failed", "Invalid Username or Password", "X");
+            }
             return loginPostResponse;
         }
 

@@ -9,9 +9,18 @@ namespace MobileApp
 {
     public partial class App : Application
     {
+        // App-Wide Mutable Values
+        // Instantiations NOT declarations
         public static PlayerDTO CurrentPlayer;
         public static DungeonMasterDTO CurrentDM;
         public static string UserToken;
+
+        // Globals Immutables
+        // API Root
+        public static string ApiUrl = "https://espresso401api.azurewebsites.net/api";
+        // Localhost versions:
+        // public static string ApiUrl = "https://localhost:44335/api";
+
 
         public App()
         {

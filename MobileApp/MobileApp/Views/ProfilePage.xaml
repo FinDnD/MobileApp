@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            Title="My Profile"
+             x:Class="MobileApp.Views.ProfilePage">
+  <!--Pages can be added as references or inline-->
+    <ContentPage Title="Settings" IconImageSource="SettingsIcon.png">
+        <ContentPage.Content>
+            <StackLayout Padding="50,0,50,100" VerticalOptions="Center">
+                <Label x:Name="Label_Theme">Dark Theme</Label>
+                <Switch IsToggled="True" Toggled="OnToggled">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="On">
+                                <VisualState.Setters>
+                                    <Setter Property="ThumbColor"
+                            Value="LightGreen" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Off">
+                                <VisualState.Setters>
+                                    <Setter Property="ThumbColor"
+                            Value="Red" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                </Switch>
+             
+            </StackLayout>
+        </ContentPage.Content>
+    </ContentPage>
+
+    <ContentPage Title="Edit My Bio" IconImageSource="BioIcon.png">
+        <ContentPage.Content>
+            <StackLayout Padding="50,0,50,100" VerticalOptions="Center">
+                <Image x:Name="Logp" Source="FindndLogo.png" HeightRequest="250"></Image>
+                <Entry x:Name="Entry_Name" Text="UserName"></Entry>
+                <Entry x:Name="Entry_Email" Text="Email"></Entry>
+                <Entry x:Name="Entry_Password" Text=" Password" IsPassword="True"></Entry>
+                <Button x:Name="Button_Update" Text="Update Info" HorizontalOptions="Start" />
+            </StackLayout>
+        </ContentPage.Content>
+    </ContentPage>
+
+</TabbedPage>

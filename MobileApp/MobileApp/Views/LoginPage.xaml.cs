@@ -28,7 +28,7 @@ namespace MobileApp.Views
             await DisplayAlert("Login","Login was successful" , "OK");
        
         
-               await Navigation.PushAsync(new AppShell());
+              
                Application.Current.MainPage = new AppShell();
 
            

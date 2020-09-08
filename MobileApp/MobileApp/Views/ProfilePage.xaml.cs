@@ -19,11 +19,11 @@ namespace MobileApp.Views
 
         void OnToggled(object sender, ToggledEventArgs e)
         {
-            bool isToogled = e.Value;
+        /*    bool isToogled = e.Value;
             if (isToogled)
             {
 
-            }
-        }           
+            }*/
+        }
     }
 }

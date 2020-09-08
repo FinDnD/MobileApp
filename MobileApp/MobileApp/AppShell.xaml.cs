@@ -11,6 +11,7 @@ namespace MobileApp
         public AppShell()
         {
             InitializeComponent();
+            this.CurrentItem.CurrentItem = SwipeTab;
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
         }

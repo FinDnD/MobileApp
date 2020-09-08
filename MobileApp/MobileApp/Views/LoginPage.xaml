@@ -26,6 +26,6 @@
                 <Button Grid.Column="2" x:Name="Button_CreateAccount" Text="SIGN UP"  HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" Clicked="UserSignUp"/>
 
             </Grid>
-            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -36,18 +36,7 @@ namespace MobileApp.Views
         /// <param name="e"></param>
         public async void UserLogIn(object sender, EventArgs e)
         {
-            var result = await SendLoginToAPI();
-
-            if (result.IsSuccessStatusCode)
-            {
-                await DisplayAlert("Login", "Login was successful", "OK");
-                Application.Current.MainPage = new AppShell();
-            }
-            else
-            {
-                // Failed Login Logic
-            }
-
+            await SendLoginToAPI();
         }
 
         /// <summary>
@@ -55,7 +44,7 @@ namespace MobileApp.Views
         /// </summary>
         /// <param name="loginInfo">Login information</param>
         /// <returns>Task of completion with HttpResponseMessage from Login</returns>
-        public async Task<HttpResponseMessage> SendLoginToAPI()
+        private async Task<HttpResponseMessage> SendLoginToAPI()
         {
             LoginVM loginInfo = new LoginVM
             {

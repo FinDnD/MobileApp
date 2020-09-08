@@ -29,10 +29,16 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-    <TabBar>
-        <ShellContent Title="Profile" Icon="ProfileIcon.PNG" ContentTemplate="{DataTemplate local:ProfilePage}" />
-        <ShellContent Title="Home" Icon="HomeIcon.PNG" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Chat" Icon="ChatIcon.PNG" ContentTemplate="{DataTemplate local:ItemsPage}" />
+    <TabBar x:Name="NavTabBar">
+        <Tab x:Name="ProfileTab" Icon="ProfileIcon.PNG" Title="Profile" >
+            <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}" />
+        </Tab>
+        <Tab x:Name="SwipeTab" Icon="HomeIcon.PNG" Title="Home" >
+            <ShellContent Route="SwipePage" ContentTemplate="{DataTemplate local:SwipePage}" />
+        </Tab>
+        <Tab x:Name="PartyTab" Icon="ChatIcon.PNG" Title="Party" >
+            <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
+        </Tab>
     </TabBar>
 
     <!--

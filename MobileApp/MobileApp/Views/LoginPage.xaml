@@ -21,7 +21,7 @@
                     <ColumnDefinition  Width="101"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" x:Name="Button_Login" Text="LOGIN" HorizontalOptions="Start" Clicked="UserLogIn"/>
+                <Button Grid.Column="0" x:Name="Button_Login" Text="LOGIN" HorizontalOptions="Start"  Clicked="UserLogIn"/>
                 <Label  Grid.Column="1" FontSize="20" HorizontalOptions="Center" VerticalTextAlignment="Center" >OR</Label>
                 <Button Grid.Column="2" x:Name="Button_CreateAccount" Text="SIGN UP"  HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" Clicked="UserSignUp"/>
 

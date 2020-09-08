@@ -25,7 +25,8 @@ namespace MobileApp.Views
        
             if(Device.OS == TargetPlatform.Android)
            {
-           Application.Current.MainPage = new NavigationPage(new Dashboard());
+               // await Navigation.PushAsync(new AppShell());
+               Application.Current.MainPage = new AppShell();
 
             }
         }

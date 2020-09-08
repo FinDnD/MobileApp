@@ -20,7 +20,7 @@ namespace MobileApp.Views.Navigation
 
         async void Selected1(object sender , EventArgs e)
         {
-            await Navigation.PushAsync(new AboutPage());
+           // await Navigation.PushAsync(new AppShell());
         }
     }
 }

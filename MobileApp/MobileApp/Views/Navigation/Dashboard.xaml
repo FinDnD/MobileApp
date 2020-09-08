@@ -4,7 +4,7 @@
              x:Class="MobileApp.Views.Navigation.Dashboard">
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand" >
-            <Button Text="SwipePage" Clicked="Selected1" HorizontalOptions="Center" VerticalOptions="Center"></Button>
+            <Button Text="SwipePage"  HorizontalOptions="Center" VerticalOptions="Center"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

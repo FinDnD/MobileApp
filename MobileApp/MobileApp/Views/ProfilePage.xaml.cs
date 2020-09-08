@@ -7,16 +7,23 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MobileApp.Views.Navigation
+namespace MobileApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Dashboard : ContentPage
+    public partial class ProfilePage : TabbedPage
     {
-        public Dashboard()
+        public ProfilePage()
         {
             InitializeComponent();
-
         }
 
+        void OnToggled(object sender, ToggledEventArgs e)
+        {
+            bool isToogled = e.Value;
+            if (isToogled)
+            {
+
+            }
+        }           
     }
 }

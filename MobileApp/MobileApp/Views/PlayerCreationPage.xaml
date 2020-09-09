@@ -50,7 +50,7 @@
                         Title="Select Class" 
                         x:Name = "SelectedClass"
                         ItemsSource="{Binding ClassList}" 
-                        ItemDisplayBinding="{Binding Class}"
+                        ItemDisplayBinding="{Binding .}"
                         SelectedItem="{Binding SelectedClass}">
                 </Picker>
                 <!--SelectedIndexChanged="OnPickerSelectedIndexChanged"-->
@@ -60,7 +60,7 @@
                         Title="Select Race" 
                         x:Name = "SelectedRace" 
                         ItemsSource="{Binding RaceList}" 
-                        ItemDisplayBinding="{Binding Race}"
+                        ItemDisplayBinding="{Binding .}"
                         SelectedItem="{Binding SelectedRace}">
                 </Picker>
                 <!--SelectedIndexChanged="OnPickerSelectedIndexChanged"-->
@@ -70,7 +70,7 @@
                         Title="Select Experience Level"
                         x:Name = "SelectedExperience"
                         ItemsSource="{Binding ExperienceList}" 
-                        ItemDisplayBinding="{Binding Experience}"
+                        ItemDisplayBinding="{Binding .}"
                         SelectedItem="{Binding SelectedExperience}">
                 </Picker>
                 <!--SelectedIndexChanged="OnPickerSelectedIndexChanged"-->

@@ -33,6 +33,7 @@ namespace MobileApp.Views
         /// <param name="e"></param>
         public async void UserLogIn(object sender, EventArgs e)
         {
+            Busy();
             await SendLoginToAPI();
         }
 
@@ -68,7 +69,7 @@ namespace MobileApp.Views
                 App.UserToken = responseInfo.Jwt;
 
                 bool profileRequest = await HandleGettingProfile(responseInfo);
-
+                NotBusy();
                 if (profileRequest)
                 {
                     Application.Current.MainPage = new AppShell();
@@ -80,6 +81,7 @@ namespace MobileApp.Views
             }
             else
             {
+                NotBusy();
                 await DisplayAlert("Login Failed", "Invalid Username or Password", "X");
             }
             return loginPostResponse;
@@ -120,10 +122,25 @@ namespace MobileApp.Views
             return false;
         }
 
-
         void UserSignUp(object sender, EventArgs e)
         {
             Application.Current.MainPage = new RegisterPage();
+        }
+
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
+            Button_Login.IsEnabled = false;
+            Button_CreateAccount.IsEnabled = false;
+        }
+
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+            Button_Login.IsEnabled = true;
+            Button_CreateAccount.IsEnabled = true;
         }
     }
 }

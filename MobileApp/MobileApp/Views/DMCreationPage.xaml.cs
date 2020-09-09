@@ -1,4 +1,6 @@
-﻿using MobileApp.Models.DTOs;
+﻿using Microsoft.WindowsAzure.Storage;
+using MobileApp.Models;
+using MobileApp.Models.DTOs;
 using Newtonsoft.Json;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
@@ -78,10 +80,9 @@ namespace MobileApp.Views
             }
         }
 
-        public async Task<string> SendImageToAPI()
+        public async Task<string> SendImageToAPI(string username)
         {
             HttpClient client = new HttpClient();
-
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.UserToken);
 
             Stream imageStream = _imageUpload.GetStream();
@@ -91,7 +92,7 @@ namespace MobileApp.Views
             content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
             {
                 Name = "file",
-                FileName = $"{App.UserId}CurrentImage"
+                FileName = $"{username}(TempImage)"
             };
 
             content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
@@ -106,6 +107,16 @@ namespace MobileApp.Views
                 }
                 return "";
             }
+
+            //var account = new CloudStorageAccount();
+            //var client = account.CreateCloudBlobClient();
+            //var container = client.GetContainerReference("images");
+            //await container.CreateIfNotExistsAsync();
+            //var name = Guid.NewGuid().ToString();
+            //var blockBlob = container.GetBlockBlobReference($"{name}.png");
+            //await blockBlob.UploadFromStreamAsync(stream);
+            //var URL = blockBlob.Uri.OriginalString;
+            //await DisplayAlert("Uploaded", "Image uploaded to Blob Storage Successfully!", "OK");
         }
 
         private async void OnSubmit(object sender, EventArgs e)
@@ -125,6 +136,7 @@ namespace MobileApp.Views
             };
             HttpClient client = new HttpClient();
 
+
             string dmJson = JsonConvert.SerializeObject(newDm);
 
             HttpContent content = new StringContent(dmJson);
@@ -139,13 +151,13 @@ namespace MobileApp.Views
             {
                 var dmString = await result.Content.ReadAsStringAsync();
                 var dm = JsonConvert.DeserializeObject<DungeonMasterDTO>(dmString);
+                App.CurrentDM = dm;
+                App.CurrentPlayer = null;
 
-                var imageUploadResult = await SendImageToAPI();
+                var imageUploadResult = await SendImageToAPI(dm.UserName);
                 if (imageUploadResult != "")
                 {
                     dm.ImageUrl = imageUploadResult;
-                    App.CurrentDM = dm;
-                    App.CurrentPlayer = null;
 
                     await DisplayAlert("Success!", "Dungeon Master created successfully, start building that party!", "OK");
                     Application.Current.MainPage = new AppShell();
@@ -154,6 +166,7 @@ namespace MobileApp.Views
                 {
                     int dmId = dm.Id;
                     var deleteResult = await client.DeleteAsync($"{DMApiUrl}/{dmId}");
+                    App.CurrentDM = null;
                     await DisplayAlert("Oh No!", "The image upload didn't work. Please try again.", "OK");
                 }
             }

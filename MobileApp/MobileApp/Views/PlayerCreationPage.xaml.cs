@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -20,11 +21,47 @@ namespace MobileApp.Views
         private string PlayerApiUrl = $"{App.ApiUrl}/DungeonMasters";
         private string ImageApiUrl = $"{App.ApiUrl}/UserImages";
 
+        public ObservableCollection<Class> _ClassList;
+        public ObservableCollection<Race> _RaceList;
+        public ObservableCollection<ExperienceLevel> _ExperienceList;
 
         public PlayerCreationPage()
         {
             InitializeComponent();
+            _ClassList = new ObservableCollection<Class>(Enum.GetValues(typeof(Class)).OfType<Class>().ToList());
+            _RaceList = new ObservableCollection<Race>(Enum.GetValues(typeof(Race)).OfType<Race>().ToList());
+            _ExperienceList = new ObservableCollection<ExperienceLevel>(Enum.GetValues(typeof(ExperienceLevel)).OfType<ExperienceLevel>().ToList());
+            BindingContext = this;
         }
+
+        public ObservableCollection<Class> ClassList
+        {
+            get => _ClassList;
+            set
+            {
+                _ClassList = value;
+            }
+        }
+
+        public ObservableCollection<Race> RaceList
+        {
+            get => _RaceList;
+            set
+            {
+                _RaceList = value;
+            }
+        }
+
+        public ObservableCollection<ExperienceLevel> ExperienceList
+        {
+            get => _ExperienceList;
+            set
+            {
+                _ExperienceList = value;
+            }
+        }
+
+
 
         public async Task OnSubmit()
         {

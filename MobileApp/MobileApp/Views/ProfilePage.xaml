@@ -35,8 +35,8 @@
         <ContentPage.Content>
             <StackLayout Padding="50,0,50,100" VerticalOptions="Center">
                 <Image x:Name="Logp" Source="FindndLogo.png" HeightRequest="250"></Image>
-                <Entry x:Name="Entry_Name" Text="UserName"></Entry>
-                <Entry x:Name="Entry_Email" Text="Email"></Entry>
+                <Entry x:Name="Entry_Name" Text="{Binding UserName}"></Entry>
+                <Entry x:Name="Entry_Email" Text="{Binding Email}"></Entry>
                 <Entry x:Name="Entry_Password" Text=" Password" IsPassword="True"></Entry>
                 <Button x:Name="Button_Update" Text="Update Info" HorizontalOptions="Start" />
             </StackLayout>

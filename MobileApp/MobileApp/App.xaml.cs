@@ -18,8 +18,6 @@ namespace MobileApp
         // Globals Immutables
         // API Root
         public static string ApiUrl = "https://espresso401api.azurewebsites.net/api";
-        // Localhost versions:
-        // public static string ApiUrl = "https://localhost:44335/api";
 
 
         public App()

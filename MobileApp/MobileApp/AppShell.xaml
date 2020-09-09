@@ -37,7 +37,7 @@
             <ShellContent Route="SwipePage" ContentTemplate="{DataTemplate local:SwipePage}" />
         </Tab>
         <Tab x:Name="PartyTab" Icon="ChatIcon.PNG" Title="Party" >
-            <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
+            <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}" />
         </Tab>
     </TabBar>
 

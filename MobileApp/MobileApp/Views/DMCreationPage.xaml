@@ -14,7 +14,7 @@
                 
 
 
-                <StackLayout>
+                <StackLayout Margin="20">
                     <!--Campaign Name - Text Entry-->
                     <Entry Grid.Row="1" 
                            x:Name="campaignNameEntry" 
@@ -22,6 +22,7 @@
                            Placeholder="Campaign Name" 
                            ReturnType="Next" 
                            Keyboard="Text" 
+
                            FontSize="Medium">
                     </Entry>
 
@@ -31,15 +32,17 @@
                             x:Name = "SelectedExperience"
                             ItemsSource="{Binding ExperienceList}" 
                             ItemDisplayBinding="{Binding .}"
-                            SelectedItem="{Binding SelectedExperience}">
+                            SelectedItem="{Binding SelectedExperience}"
+                            >
                 </Picker>
 
                 <!--Campaign Description-->
-                    <Label Margin="3,0,3,0"
+                    <Label Margin="10,0,10,0"
                                Text="Campaign Description" 
                                TextColor="Gray"
                                FontSize="Medium" 
-                               HorizontalOptions="Start"/>
+                               HorizontalOptions="Start"
+                               />
                     <Editor x:Name="CampaignDescription" 
                                 TextColor="Gray"
                                 HeightRequest="60"
@@ -47,7 +50,7 @@
                                 Placeholder="Tell us all about this campaign. Where will you go? What will you do? Who/What's the big bad? "/>
 
                     <!--Personal Bio-->
-                    <Label Margin="3,0,3,0"
+                    <Label Margin="3, 0, 3, 0"
                                Text="Personal Bio" 
                                TextColor="Gray"
                                FontSize="Medium" 
@@ -67,7 +70,8 @@
                             Text="Upload Image"
                             Clicked="btnSelectPic_Clicked"
                             BackgroundColor="#e3e3e3" 
-                            TextColor="#9D0A0E"/>
+                            TextColor="#9D0A0E"
+                            />
 
 
                     <!--Save Button-->
@@ -77,7 +81,8 @@
                             TextColor="White" 
                             Clicked="OnSubmit"
                             HeightRequest="50" 
-                            VerticalOptions="Start" />
+                            VerticalOptions="Start"
+                            />
                 </StackLayout>
         </StackLayout>
 

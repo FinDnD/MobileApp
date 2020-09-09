@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using MobileApp.ViewModels;
 using MobileApp.Views;
 using Xamarin.Forms;
 
@@ -12,8 +11,7 @@ namespace MobileApp
         {
             InitializeComponent();
             this.CurrentItem.CurrentItem = SwipeTab;
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
+
         }
 
     }

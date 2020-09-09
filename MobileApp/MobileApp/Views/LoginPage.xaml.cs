@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using MobileApp.Models;
 using MobileApp.Models.DTOs;
 using MobileApp.Models.ViewModels;
-using MobileApp.ViewModels;
 using MobileApp.Views.Navigation;
 using Newtonsoft.Json;
 using Xamarin.Forms;

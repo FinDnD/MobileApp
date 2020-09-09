@@ -5,7 +5,12 @@
              xmlns:swipeCardView="clr-namespace:MLToolkit.Forms.SwipeCardView;assembly=MLToolkit.Forms.SwipeCardView"
              xmlns:system="clr-namespace:System;assembly=netstandard"
              Title="Home">
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Logout"
+                     Order="Primary"
+                     Priority="0"
+                     Clicked="Logout"/>
+    </ContentPage.ToolbarItems>
 
     <RefreshView>
         <StackLayout>

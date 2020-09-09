@@ -116,7 +116,6 @@ namespace MobileApp.Views
                     var player = JsonConvert.DeserializeObject<PlayerDTO>(playerString);
                     App.CurrentPlayer = player;
                     App.CurrentDM = null;
-                    App.Current.MainPage = new AppShell();
                     Application.Current.MainPage = new AppShell();
                 }
                 else

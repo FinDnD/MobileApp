@@ -206,6 +206,18 @@ namespace MobileApp.Views
             }
         }
 
+        private void Logout(object sender, EventArgs e)
+        {
+            App.CurrentDM = null;
+            App.CurrentPlayer = null;
+            App.UserToken = null;
+            App.UserName = null;
+            App.UserId = null;
+            Application.Current.MainPage = new LoginPage();
+        }
+
+
+
         public class UserProfile
         {
             public string ProfileType { get; set; }

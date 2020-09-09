@@ -161,7 +161,7 @@ namespace MobileApp.Views
 
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var response = await client.PutAsync(APIRoute, content);
+            HttpResponseMessage response = await client.PutAsync(APIRoute, content);
         }
 
 

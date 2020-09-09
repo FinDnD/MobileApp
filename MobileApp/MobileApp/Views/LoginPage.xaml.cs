@@ -25,8 +25,6 @@ namespace MobileApp.Views
         public LoginPage()
         {
             InitializeComponent();
-            this.BindingContext = new LoginViewModel();
-
         }
 
         /// <summary>
@@ -54,13 +52,13 @@ namespace MobileApp.Views
 
             HttpClient client = new HttpClient();
 
-            var loginInfoJson = JsonConvert.SerializeObject(loginInfo);
+            string loginInfoJson = JsonConvert.SerializeObject(loginInfo);
 
             HttpContent content = new StringContent(loginInfoJson);
 
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var loginPostResponse = await client.PostAsync(APIRoute, content);
+            HttpResponseMessage loginPostResponse = await client.PostAsync(APIRoute, content);
 
             if (loginPostResponse.IsSuccessStatusCode)
             {
@@ -70,11 +68,10 @@ namespace MobileApp.Views
 
                 App.UserToken = responseInfo.Jwt;
 
-                var profileRequest = await HandleGettingProfile(responseInfo);
+                bool profileRequest = await HandleGettingProfile(responseInfo);
 
                 if (profileRequest)
                 {
-                    await DisplayAlert("Login", "Login was successful", "OK");
                     Application.Current.MainPage = new AppShell();
                 }
                 else
@@ -99,7 +96,7 @@ namespace MobileApp.Views
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", responseInfo.Jwt);
 
-            var playerRequest = await client.GetAsync($"{App.ApiUrl}/Players/UserId/{responseInfo.UserId}");
+            HttpResponseMessage playerRequest = await client.GetAsync($"{App.ApiUrl}/Players/UserId/{responseInfo.UserId}");
 
             if (playerRequest.StatusCode == HttpStatusCode.OK)
             {
@@ -110,7 +107,7 @@ namespace MobileApp.Views
             }
             else
             {
-                var dmRequest = await client.GetAsync($"{App.ApiUrl}/DungeonMasters/UserId/{responseInfo.UserId}");
+                HttpResponseMessage dmRequest = await client.GetAsync($"{App.ApiUrl}/DungeonMasters/UserId/{responseInfo.UserId}");
                 if (dmRequest.IsSuccessStatusCode)
                 {
                     string rawDM = await dmRequest.Content.ReadAsStringAsync();
@@ -125,8 +122,7 @@ namespace MobileApp.Views
 
         void UserSignUp(object sender, EventArgs e)
         {
-            DisplayAlert("Register", "You will be redirected to the Register Page", "OK");
-            Application.Current.MainPage = new NavigationPage(new AboutPage());
+            Application.Current.MainPage = new RegisterPage();
         }
     }
 }

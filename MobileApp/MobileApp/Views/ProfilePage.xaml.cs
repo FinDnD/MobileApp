@@ -15,6 +15,11 @@ namespace MobileApp.Views
         public ProfilePage()
         {
             InitializeComponent();
+            ContentPage newPage = new ContentPage();
+            newPage.Title = "Player View";
+            newPage.IconImageSource = "";
+            Label label = new Label();
+            Children.Add(newPage);
         }
 
         void OnToggled(object sender, ToggledEventArgs e)

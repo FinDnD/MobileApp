@@ -11,11 +11,12 @@
         <StackLayout>
             <swipeCardView:SwipeCardView
                 x:Name="SwipeCard"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"
                 SwipedCommand="{Binding SwipedCommand}"
                 ItemsSource="{Binding Profiles}"
-                Padding="10"
+                Padding="10, 10, 10, 0"
+                HeightRequest="460"
                 Threshold="{Binding Threshold}"
                 SupportedSwipeDirections="Left, Right"
                 SupportedDraggingDirections="Left, Right"
@@ -27,7 +28,7 @@
                                 <AbsoluteLayout>
                                     <Image Source="{Binding Image}" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" AbsoluteLayout.LayoutFlags="All"></Image>
 
-                                    <Label FontSize="Large" FontAttributes="Bold" TextColor="Red" AbsoluteLayout.LayoutBounds="0.1, 0.95, 150, 30" AbsoluteLayout.LayoutFlags="PositionProportional" >
+                                    <Label FontSize="Large" FontAttributes="Bold" TextColor="Red" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0.1, 0.95, 150, 30" AbsoluteLayout.LayoutFlags="PositionProportional" >
                                         <Label.FormattedText>
                                             <FormattedString x:Name="CardContent">
                                                 <Span Text="{Binding UserName}" />
@@ -43,15 +44,15 @@
                     </DataTemplate>
                 </swipeCardView:SwipeCardView.ItemTemplate>
             </swipeCardView:SwipeCardView>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="10, 10, 10, 20" Spacing="30">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="10, 0, 10, 10" Spacing="30">
                 <StackLayout>
-                    <Button x:Name="nopeButton"  Image="Shield.png" Clicked="OnDislikeClicked" WidthRequest="60" HeightRequest="60" CornerRadius="30" BackgroundColor="White" Scale="1"></Button>
+                    <Button x:Name="nopeButton"  Image="Shield.png" Clicked="OnDislikeClicked" WidthRequest="60" HeightRequest="60" CornerRadius="30" BackgroundColor="WhiteSmoke" Scale="1"></Button>
                 </StackLayout>      
                 <StackLayout>
-                    <Button x:Name="infoButton"  Image="tab_about.png" Clicked="OnInfoClicked" WidthRequest="60" HeightRequest="60" CornerRadius="30" BackgroundColor="White" Scale="1"></Button>
+                    <Button x:Name="infoButton"  Image="tab_about.png" Clicked="OnInfoClicked" WidthRequest="60" HeightRequest="60" CornerRadius="30" BackgroundColor="WhiteSmoke" Scale="1"></Button>
                 </StackLayout>
                 <StackLayout>
-                    <Button x:Name="likeButton" Image="CrossedSwords.png" Clicked="OnLikeClicked" WidthRequest="60" HeightRequest="60" CornerRadius="30" BackgroundColor="White" Scale="1"></Button>
+                    <Button x:Name="likeButton" Image="CrossedSwords.png" Clicked="OnLikeClicked" WidthRequest="60" HeightRequest="60" CornerRadius="30" BackgroundColor="WhiteSmoke" Scale="1"></Button>
                 </StackLayout>
             </StackLayout>
         </StackLayout>

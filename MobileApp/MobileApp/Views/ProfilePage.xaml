@@ -43,4 +43,8 @@
         </ContentPage.Content>
     </ContentPage>
 
+    <ContentPage Title="Profile View" IconImageSource="" x:Name="ProfileView">
+        
+    </ContentPage>
+
 </TabbedPage>

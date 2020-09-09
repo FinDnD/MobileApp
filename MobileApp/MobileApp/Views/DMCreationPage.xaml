@@ -3,108 +3,92 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileApp.Views.DMCreationPage">
     <ContentPage.Content>
-        <Grid>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="80*"/>
-                <RowDefinition Height="10*"/>
-            </Grid.RowDefinitions>
-
-            <!--Logo and Headline-->
+        <StackLayout>
+            
+        <!--Logo and Headline-->
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="10,10,0,10" Padding="0,30,0,0">
                 <Image Source="dice_icon50.png" VerticalOptions="Center" />
 
                 <Label Text="Create Your Dungeon Master" Padding="0,10,0,0" FontSize="Large" HorizontalOptions="Center" TextColor="Black" />
             </StackLayout>
+                
 
-            <Grid VerticalOptions="Center" Grid.Row="1" Margin="20,0,20,0" Padding="0,10,0,0">
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="50" />
-                </Grid.RowDefinitions>
+                <StackLayout Margin="20">
+                    <!--Campaign Name - Text Entry-->
+                    <Entry Grid.Row="1" 
+                           x:Name="campaignNameEntry" 
+                           Text="{Binding CampaignName}" 
+                           Placeholder="Campaign Name" 
+                           ReturnType="Next" 
+                           Keyboard="Text" 
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
+                           FontSize="Medium">
+                    </Entry>
 
-                <!--Campaign Name - Text Entry-->
-                <Entry Grid.Row="1" 
-                       x:Name="campaignNameEntry" 
-                       Text="{Binding CampaignName}" 
-                       Placeholder="Campaign Name" 
-                       ReturnType="Next" 
-                       Keyboard="Text" 
-                       FontSize="Medium">
-                </Entry>
-
-                <!--Experience Level Picker-->
+                    <!--Experience Level Picker-->
                 <Picker Grid.Row="2" 
-                        Title="Select Experience Level"
-                        x:Name = "SelectedExperience"
-                        ItemsSource="{Binding ExperienceList}" 
-                        ItemDisplayBinding="{Binding Experience}"
-                        SelectedItem="{Binding SelectedExperience}">
+                            Title="Select Experience Level"
+                            x:Name = "SelectedExperience"
+                            ItemsSource="{Binding ExperienceList}" 
+                            ItemDisplayBinding="{Binding .}"
+                            SelectedItem="{Binding SelectedExperience}"
+                            >
                 </Picker>
 
+                <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="DodgerBlue" />
+
                 <!--Campaign Description-->
-                <StackLayout Grid.Row="3" Padding="0,3,0,0">
-                    <Label Margin="3,0,3,0"
-                           Text="Campaign Description" 
-                           TextColor="Gray"
-                           FontSize="Medium" 
-                           HorizontalOptions="Start"/>
+                    <Label Margin="10,0,10,0"
+                               Text="Campaign Description" 
+                               TextColor="Gray"
+                               FontSize="Medium" 
+                               HorizontalOptions="Start"
+                               />
                     <Editor x:Name="CampaignDescription" 
-                            TextColor="Gray"
-                            HeightRequest="60"
-                            FontSize="Medium" 
-                            Text="Tell us all about this campaign. Where will you go? What will you do? Who might you meet along the way? "/>
-                </StackLayout>
+                                TextColor="Gray"
+                                HeightRequest="60"
+                                FontSize="Medium" 
+                                Placeholder="Tell us all about this campaign. Where will you go? What will you do? Who/What's the big bad? "/>
 
-                <!--Personal Bio-->
-                <StackLayout Grid.Row="4" Padding="0,38,0,0">
-                    <Label Margin="3,0,3,0"
-                           Text="Personal Bio" 
-                           TextColor="Gray"
-                           FontSize="Medium" 
-                           HorizontalOptions="Start"/>
+                    <!--Personal Bio-->
+                    <Label Margin="3, 0, 3, 0"
+                               Text="Personal Bio" 
+                               TextColor="Gray"
+                               FontSize="Medium" 
+                               HorizontalOptions="Start"/>
                     <Editor x:Name="PersonalBio" 
-                            TextColor="Gray"
-                            HeightRequest="60"
-                            FontSize="Medium" 
-                            Text="Tell the other players a little bit about this yourself! "/>
-                </StackLayout>
-
-                <!--Image Upload Button-->
-                <!--TODO: Clicked="Button_Clicked" -->
-                <StackLayout Grid.Row="5" Padding="0,90,0,0">
-                <Button Grid.Row="5" 
-                        x:Name="ButtonSelectPic" 
-                        Grid.Column="0" 
-                        Text="upload image"
-                        BackgroundColor="#e3e3e3" 
-                        TextColor="#9D0A0E"/>
-                </StackLayout>
-                
-                <!--Save Button-->
-                <StackLayout Grid.Row="5" Padding="0,155,0,0">
-                <Button Grid.Row="6" 
-                        Text="SAVE" 
-                        BackgroundColor="#9D0A0E" 
-                        TextColor="White" 
-                        HeightRequest="50" 
-                        VerticalOptions="Start" />
-                </StackLayout>
-            </Grid>
+                                TextColor="Gray"
+                                HeightRequest="60"
+                                FontSize="Medium" 
+                                Placeholder="Tell the other players a little bit about this yourself! "/>
 
 
-        </Grid>
+                    <!--Image Upload Button-->
+                    <!--TODO: Clicked="Button_Clicked" -->
+                    <Button Grid.Row="5" 
+                            x:Name="ButtonSelectPic" 
+                            Grid.Column="0" 
+                            Text="UPLOAD IMAGE"
+                            Clicked="btnSelectPic_Clicked"
+                            BackgroundColor="#e3e3e3" 
+                            TextColor="#9D0A0E"
+                            />
+
+
+                    <!--Save Button-->
+                    <Button Grid.Row="6" 
+                            x:Name="SubmitButton"
+                            Text="CREATE DUNGEON MASTER" 
+                            BackgroundColor="#9D0A0E" 
+                            TextColor="White" 
+                            Clicked="OnSubmit"
+                            HeightRequest="50" 
+                            VerticalOptions="Start"
+                            />
+                </StackLayout>
+        </StackLayout>
+
+
     </ContentPage.Content>
 </ContentPage>

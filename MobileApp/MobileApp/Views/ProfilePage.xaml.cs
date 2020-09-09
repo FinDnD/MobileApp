@@ -15,15 +15,21 @@ namespace MobileApp.Views
         public ProfilePage()
         {
             InitializeComponent();
+
         }
+
+        public void CreateContentPage()
+        {
+            var page = new ContentPage();
+
+            var grid = new Grid() {  };
+
+        }
+
 
         void OnToggled(object sender, ToggledEventArgs e)
         {
-        /*    bool isToogled = e.Value;
-            if (isToogled)
-            {
 
-            }*/
         }
     }
 }

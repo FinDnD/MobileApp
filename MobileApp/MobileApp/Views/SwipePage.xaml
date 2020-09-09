@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileApp.Views.SwipePage"
              xmlns:swipeCardView="clr-namespace:MLToolkit.Forms.SwipeCardView;assembly=MLToolkit.Forms.SwipeCardView"
+             xmlns:system="clr-namespace:System;assembly=netstandard"
              Title="Home">
 
 
@@ -10,14 +11,15 @@
         <StackLayout>
             <swipeCardView:SwipeCardView
                 x:Name="SwipeCard"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"
                 SwipedCommand="{Binding SwipedCommand}"
                 ItemsSource="{Binding Profiles}"
-                Padding="10"
+                Padding="10, 10, 10, 0"
+                HeightRequest="460"
                 Threshold="{Binding Threshold}"
-                SupportedSwipeDirections="Left, Right, Up"
-                SupportedDraggingDirections="Left, Right, Up"
+                SupportedSwipeDirections="Left, Right"
+                SupportedDraggingDirections="Left, Right"
                 LoopCards="False">
                 <swipeCardView:SwipeCardView.ItemTemplate>
                     <DataTemplate>
@@ -26,12 +28,13 @@
                                 <AbsoluteLayout>
                                     <Image Source="{Binding Image}" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" AbsoluteLayout.LayoutFlags="All"></Image>
 
-                                    <Label FontSize="Large" FontAttributes="Bold" BackgroundColor="SlateGray" Opacity="0.65" TextColor="Red" >
+                                    <Label FontSize="Large" FontAttributes="Bold" TextColor="Red" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0.1, 0.95, 150, 30" AbsoluteLayout.LayoutFlags="PositionProportional" >
                                         <Label.FormattedText>
                                             <FormattedString x:Name="CardContent">
-                                                <Span Text="{Binding Name}"></Span>
-                                                <Span Text=", "></Span>
-                                                <Span Text="{Binding ExperienceLevel}"></Span>
+                                                <Span Text="{Binding UserName}" />
+                                                <Span Text="{x:Static system:Environment.NewLine}"/>
+                                                <Span>Experience Level: </Span>
+                                                <Span Text="{Binding ExperienceLevel}" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
@@ -41,15 +44,15 @@
                     </DataTemplate>
                 </swipeCardView:SwipeCardView.ItemTemplate>
             </swipeCardView:SwipeCardView>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="10, 10, 10, 20" Spacing="30">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="10, 0, 10, 10" Spacing="30">
                 <StackLayout>
-                    <Button x:Name="nopeButton"  Image="Shield.png" Clicked="OnDislikeClicked" WidthRequest="60" HeightRequest="60" CornerRadius="30" BackgroundColor="White" Scale="1"></Button>
+                    <Button x:Name="nopeButton"  Image="Shield.png" Clicked="OnDislikeClicked" WidthRequest="60" HeightRequest="60" CornerRadius="30" BackgroundColor="WhiteSmoke" Scale="1"></Button>
                 </StackLayout>      
                 <StackLayout>
-                    <Button x:Name="infoButton"  Image="tab_about.png" Clicked="OnInfoClicked" WidthRequest="60" HeightRequest="60" CornerRadius="30" BackgroundColor="White" Scale="1"></Button>
+                    <Button x:Name="infoButton"  Image="tab_about.png" Clicked="OnInfoClicked" WidthRequest="60" HeightRequest="60" CornerRadius="30" BackgroundColor="WhiteSmoke" Scale="1"></Button>
                 </StackLayout>
                 <StackLayout>
-                    <Button x:Name="likeButton" Image="CrossedSwords.png" Clicked="OnLikeClicked" WidthRequest="60" HeightRequest="60" CornerRadius="30" BackgroundColor="White" Scale="1"></Button>
+                    <Button x:Name="likeButton" Image="CrossedSwords.png" Clicked="OnLikeClicked" WidthRequest="60" HeightRequest="60" CornerRadius="30" BackgroundColor="WhiteSmoke" Scale="1"></Button>
                 </StackLayout>
             </StackLayout>
         </StackLayout>

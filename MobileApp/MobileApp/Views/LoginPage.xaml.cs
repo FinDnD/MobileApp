@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using MobileApp.Models;
 using MobileApp.Models.DTOs;
 using MobileApp.Models.ViewModels;
-using MobileApp.ViewModels;
 using MobileApp.Views.Navigation;
 using Newtonsoft.Json;
 using Xamarin.Forms;
@@ -25,8 +24,6 @@ namespace MobileApp.Views
         public LoginPage()
         {
             InitializeComponent();
-            this.BindingContext = new LoginViewModel();
-
         }
 
         /// <summary>
@@ -36,18 +33,8 @@ namespace MobileApp.Views
         /// <param name="e"></param>
         public async void UserLogIn(object sender, EventArgs e)
         {
-            var result = await SendLoginToAPI();
-
-            if (result.IsSuccessStatusCode)
-            {
-                await DisplayAlert("Login", "Login was successful", "OK");
-                Application.Current.MainPage = new AppShell();
-            }
-            else
-            {
-                // Failed Login Logic
-            }
-
+            Busy();
+            await SendLoginToAPI();
         }
 
         /// <summary>
@@ -55,7 +42,7 @@ namespace MobileApp.Views
         /// </summary>
         /// <param name="loginInfo">Login information</param>
         /// <returns>Task of completion with HttpResponseMessage from Login</returns>
-        public async Task<HttpResponseMessage> SendLoginToAPI()
+        private async Task<HttpResponseMessage> SendLoginToAPI()
         {
             LoginVM loginInfo = new LoginVM
             {
@@ -65,13 +52,13 @@ namespace MobileApp.Views
 
             HttpClient client = new HttpClient();
 
-            var loginInfoJson = JsonConvert.SerializeObject(loginInfo);
+            string loginInfoJson = JsonConvert.SerializeObject(loginInfo);
 
             HttpContent content = new StringContent(loginInfoJson);
 
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var loginPostResponse = await client.PostAsync(APIRoute, content);
+            HttpResponseMessage loginPostResponse = await client.PostAsync(APIRoute, content);
 
             if (loginPostResponse.IsSuccessStatusCode)
             {
@@ -81,11 +68,10 @@ namespace MobileApp.Views
 
                 App.UserToken = responseInfo.Jwt;
 
-                var profileRequest = await HandleGettingProfile(responseInfo);
-
+                bool profileRequest = await HandleGettingProfile(responseInfo);
+                NotBusy();
                 if (profileRequest)
                 {
-                    await DisplayAlert("Login", "Login was successful", "OK");
                     Application.Current.MainPage = new AppShell();
                 }
                 else
@@ -95,6 +81,7 @@ namespace MobileApp.Views
             }
             else
             {
+                NotBusy();
                 await DisplayAlert("Login Failed", "Invalid Username or Password", "X");
             }
             return loginPostResponse;
@@ -110,34 +97,51 @@ namespace MobileApp.Views
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", responseInfo.Jwt);
 
-            var playerRequest = await client.GetAsync($"{App.ApiUrl}/Players/UserId/{responseInfo.UserId}");
+            HttpResponseMessage playerRequest = await client.GetAsync($"{App.ApiUrl}/Players/UserId/{responseInfo.UserId}");
 
             if (playerRequest.StatusCode == HttpStatusCode.OK)
             {
                 string rawPlayer = await playerRequest.Content.ReadAsStringAsync();
                 App.CurrentPlayer = JsonConvert.DeserializeObject<PlayerDTO>(rawPlayer);
                 App.CurrentDM = null;
+                App.UserId = App.CurrentPlayer.UserId;
+                App.UserName = Entry_Name.Text;
                 return true;
             }
             else
             {
-                var dmRequest = await client.GetAsync($"{App.ApiUrl}/DungeonMasters/UserId/{responseInfo.UserId}");
+                HttpResponseMessage dmRequest = await client.GetAsync($"{App.ApiUrl}/DungeonMasters/UserId/{responseInfo.UserId}");
                 if (dmRequest.IsSuccessStatusCode)
                 {
                     string rawDM = await dmRequest.Content.ReadAsStringAsync();
                     App.CurrentDM = JsonConvert.DeserializeObject<DungeonMasterDTO>(rawDM);
                     App.CurrentPlayer = null;
+                    App.UserId = App.CurrentDM.UserId;
                     return true;
                 }
             };
             return false;
         }
 
-
         void UserSignUp(object sender, EventArgs e)
         {
-            DisplayAlert("Register", "You will be redirected to the Register Page", "OK");
-            Application.Current.MainPage = new NavigationPage(new AboutPage());
+            Application.Current.MainPage = new RegisterPage();
+        }
+
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
+            Button_Login.IsEnabled = false;
+            Button_CreateAccount.IsEnabled = false;
+        }
+
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+            Button_Login.IsEnabled = true;
+            Button_CreateAccount.IsEnabled = true;
         }
     }
 }

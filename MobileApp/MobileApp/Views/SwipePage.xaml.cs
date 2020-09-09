@@ -1,9 +1,13 @@
 ﻿using MLToolkit.Forms.SwipeCardView.Core;
 using MobileApp.Models.DTOs;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -18,6 +22,7 @@ namespace MobileApp.Views
         public List<UserProfile> _Profiles = new List<UserProfile>();
         public List<RequestDTO> _Requests = new List<RequestDTO>();
         public string APIRoute = $"{App.ApiUrl}/Swipes";
+        public int CurrentRequestIndex;
 
         public ICommand SwipedCommand { get; }
 
@@ -27,7 +32,6 @@ namespace MobileApp.Views
             InitializeComponent();
             CardBinding();
             SwipedCommand = new Command<SwipedCardEventArgs>(OnSwiped);
-
             BindingContext = this;
         }
 
@@ -45,7 +49,8 @@ namespace MobileApp.Views
                     {
                         ProfileType = "Dungeon Master",
                         UserName = request.DungeonMaster.UserName,
-                        ExperienceLevel = request.DungeonMaster.ExperienceLevel
+                        ExperienceLevel = request.DungeonMaster.ExperienceLevel,
+                        Image = request.DungeonMaster.ImageUrl
                     });
                 }
                 _Requests = App.CurrentPlayer.ActiveRequests;
@@ -59,31 +64,18 @@ namespace MobileApp.Views
                     {
                         ProfileType = "Player",
                         UserName = request.Player.UserName,
-                        ExperienceLevel = request.Player.ExperienceLevel
+                        ExperienceLevel = request.Player.ExperienceLevel,
+                        Image = request.Player.ImageUrl
                     });
                 }
                 _Requests = App.CurrentDM.ActiveRequests;
             }
+            CurrentRequestIndex = 0;
         }
 
-        //public Label DMCardLabel()
-        //{
-        //    Label label = new Label
-        //    {
-        //        FontSize = 21,
-        //        FontAttributes = FontAttributes.Bold,
-        //        TextColor = Color.WhiteSmoke
-        //    };
-        //    var formattedString = new FormattedString();
-        //    // Add Inner content
-        //    formattedString.Spans.Add(new Span
-        //    {
-
-        //    });
-        //    return label;
-        //}
-
-
+        /// <summary>
+        /// Used for Binding Profiles to Front End
+        /// </summary>
         public List<UserProfile> Profiles
         {
             get => _Profiles;
@@ -107,13 +99,16 @@ namespace MobileApp.Views
                 case SwipeCardDirection.None:
                     break;
                 case SwipeCardDirection.Right:
-                    // await HandleSwipeRight(request);
+                    await HandleSwipeRight(request);
+                    CurrentRequestIndex++;
                     break;
                 case SwipeCardDirection.Left:
-                    // await HandleSwipeLeft(request);
+                    await HandleSwipeLeft(request);
+                    CurrentRequestIndex++;
                     break;
                 case SwipeCardDirection.Up:
-                    // Go to Info View for user?
+                    await HandleSwipeUp(request);
+                    CurrentRequestIndex++;
                     break;
             }
         }
@@ -122,7 +117,7 @@ namespace MobileApp.Views
         /// Handle logic for right swipes or "accepted"
         /// </summary>
         /// <param name="request">Request that the swipe occured on</param>
-        private async void HandleSwipeRight(RequestDTO request)
+        private async Task HandleSwipeRight(RequestDTO request)
         {
             if (App.CurrentPlayer != null)
             {
@@ -133,22 +128,44 @@ namespace MobileApp.Views
                 request.DungeonMasterAccepted = true;
             }
 
-            // Post request to API
-            // LOGIC
+            await PutRequest(request);
 
             if (request.PlayerAccepted && request.DungeonMasterAccepted)
             {
-                // Handle Match
+                if(App.CurrentPlayer != null)
+                {
+                    await DisplayAlert("Matched!", "A whole new party awaits!", "X");
+                }
+                else
+                {
+                    await DisplayAlert("Matched!", "A new player has joined your party!", "X");
+                }
+
             }
         }
 
-        private async void HandleSwipeLeft(RequestDTO request)
+        private async Task HandleSwipeLeft(RequestDTO request)
         {
             request.Active = false;
-            // Post request to API
+            await PutRequest(request);
         }
 
-        private async void HandleSwipeUp(RequestDTO request)
+        private async Task PutRequest(RequestDTO request)
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.UserToken);
+
+            string requestString = JsonConvert.SerializeObject(request);
+
+            HttpContent content = new StringContent(requestString);
+
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            HttpResponseMessage response = await client.PutAsync(APIRoute, content);
+        }
+
+
+        private async Task HandleSwipeUp(RequestDTO request)
         {
             if (App.CurrentPlayer != null)
             {
@@ -174,9 +191,19 @@ namespace MobileApp.Views
             SwipeCard.InvokeSwipe(SwipeCardDirection.Right);
         }
 
-        private void OnInfoClicked(object sender, EventArgs e)
+        private async void OnInfoClicked(object sender, EventArgs e)
         {
-            SwipeCard.InvokeSwipe(SwipeCardDirection.Up);
+            RequestDTO request = _Requests[CurrentRequestIndex];
+            if (App.CurrentPlayer != null)
+            {
+                DungeonMasterDTO dm = request.DungeonMaster;
+                await DisplayAlert("Dungeon Master Info", $"Campaign Name: {dm.CampaignName}\nDescription:\n{dm.CampaignDesc}\nAbout Me:\n{dm.PersonalBio}", "Back to Swiping");
+            }
+            else
+            {
+                PlayerDTO player = request.Player;
+                await DisplayAlert("Player Info", $"Name: {player.CharacterName}\nClass: {player.Class}\nRace: {player.Race}\nGood: {player.GoodAlignment}%\nLawful: {player.LawAlignment}%", "Back to Swiping");
+            }
         }
 
         public class UserProfile

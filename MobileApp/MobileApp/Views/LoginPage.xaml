@@ -13,6 +13,7 @@
             <Entry x:Name="Entry_Name" Text="{Binding Username}"></Entry>
             <Label x:Name="Label_Password" >Password</Label>
             <Entry x:Name="Entry_Password" Text="{Binding Password}" IsPassword="True"></Entry>
+            <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="DodgerBlue" />
             <Grid Margin="10,10,10,10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50" />
@@ -26,6 +27,6 @@
                 <Button Grid.Column="2" x:Name="Button_CreateAccount" Text="SIGN UP"  HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" Clicked="UserSignUp"/>
 
             </Grid>
-            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

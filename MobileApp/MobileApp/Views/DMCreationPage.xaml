@@ -50,12 +50,11 @@
                         Title="Select Experience Level"
                         x:Name = "SelectedExperience"
                         ItemsSource="{Binding ExperienceList}" 
-                        ItemDisplayBinding="{Binding Experience}"
+                        ItemDisplayBinding="{Binding .}"
                         SelectedItem="{Binding SelectedExperience}">
                 </Picker>
 
                 <!--Campaign Description-->
-                <StackLayout Grid.Row="3" Padding="0,3,0,0">
                     <Label Margin="3,0,3,0"
                            Text="Campaign Description" 
                            TextColor="Gray"
@@ -65,11 +64,9 @@
                             TextColor="Gray"
                             HeightRequest="60"
                             FontSize="Medium" 
-                            Text="Tell us all about this campaign. Where will you go? What will you do? Who might you meet along the way? "/>
-                </StackLayout>
+                            Placeholder="Tell us all about this campaign. Where will you go? What will you do? Who/What's the big bad? "/>
 
                 <!--Personal Bio-->
-                <StackLayout Grid.Row="4" Padding="0,38,0,0">
                     <Label Margin="3,0,3,0"
                            Text="Personal Bio" 
                            TextColor="Gray"
@@ -79,29 +76,28 @@
                             TextColor="Gray"
                             HeightRequest="60"
                             FontSize="Medium" 
-                            Text="Tell the other players a little bit about this yourself! "/>
-                </StackLayout>
+                            Placeholder="Tell the other players a little bit about this yourself! "/>
+
 
                 <!--Image Upload Button-->
                 <!--TODO: Clicked="Button_Clicked" -->
-                <StackLayout Grid.Row="5" Padding="0,90,0,0">
                 <Button Grid.Row="5" 
                         x:Name="ButtonSelectPic" 
                         Grid.Column="0" 
-                        Text="upload image"
+                        Text="Upload Image"
+                        Clicked="btnSelectPic_Clicked"
                         BackgroundColor="#e3e3e3" 
                         TextColor="#9D0A0E"/>
-                </StackLayout>
+
                 
                 <!--Save Button-->
-                <StackLayout Grid.Row="5" Padding="0,155,0,0">
                 <Button Grid.Row="6" 
-                        Text="SAVE" 
+                        Text="CREATE DUNGEON MASTER" 
                         BackgroundColor="#9D0A0E" 
                         TextColor="White" 
+                        Clicked="OnSubmit"
                         HeightRequest="50" 
                         VerticalOptions="Start" />
-                </StackLayout>
             </Grid>
 
 

@@ -103,6 +103,7 @@ namespace MobileApp.Views
                 string rawPlayer = await playerRequest.Content.ReadAsStringAsync();
                 App.CurrentPlayer = JsonConvert.DeserializeObject<PlayerDTO>(rawPlayer);
                 App.CurrentDM = null;
+                App.UserId = App.CurrentPlayer.UserId;
                 return true;
             }
             else
@@ -113,6 +114,7 @@ namespace MobileApp.Views
                     string rawDM = await dmRequest.Content.ReadAsStringAsync();
                     App.CurrentDM = JsonConvert.DeserializeObject<DungeonMasterDTO>(rawDM);
                     App.CurrentPlayer = null;
+                    App.UserId = App.CurrentDM.UserId;
                     return true;
                 }
             };

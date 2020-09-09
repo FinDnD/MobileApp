@@ -1,4 +1,5 @@
-﻿using MobileApp.Models.ViewModels;
+﻿using MobileApp.Models;
+using MobileApp.Models.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -22,14 +23,22 @@ namespace MobileApp.Views
             InitializeComponent();
         }
 
-        public async Task SubmitRegistration()
+        async void SubmitRegistration(object sender, EventArgs e)
         {
             RegisterVM registrationInfo = new RegisterVM
             {
                 Email = userEmailEntry.Text,
                 Username = userNameEntry.Text,
-                Password = userPassword.Text
+                Password = userPassword.Text,
+                ConfirmPassword = userPasswordConfirmed.Text
             };
+
+            // true = Dungeon Master
+            // false = Player
+
+            bool profileType = await DisplayAlert("", "Would you like to sign up with a Dungeon Master or a Player profile?", "Dungeon Master", "Player");
+
+            registrationInfo.ProfileType = profileType ? "DungeonMaster" : "Player";
 
             HttpClient client = new HttpClient();
 
@@ -43,9 +52,11 @@ namespace MobileApp.Views
 
             if (registerPostResponse.IsSuccessStatusCode)
             {
-                // true = Dungeon Master
-                // false = Player
-                bool profileType = await DisplayAlert("", "Would you like to sign up as a Dungeon Master or a Player profile?", "Dungeon Master", "Player");
+                string rawToken = await registerPostResponse.Content.ReadAsStringAsync();
+
+                AccountInfo responseInfo = JsonConvert.DeserializeObject<AccountInfo>(rawToken);
+
+                App.UserToken = responseInfo.Jwt;
 
                 if (profileType)
                 {
@@ -56,10 +67,14 @@ namespace MobileApp.Views
                     Application.Current.MainPage = new PlayerCreationPage();
                 }
             }
+            else
+            {
+                await DisplayAlert("Error", "Looks like something went wrong, make sure all the info is sound!", "X");
+            }
         }
 
 
-        public static void ReturnToLogin()
+        void ReturnToLogin(object sender, EventArgs e)
         {
             Application.Current.MainPage = new LoginPage();
         }

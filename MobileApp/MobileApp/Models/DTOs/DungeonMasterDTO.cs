@@ -12,6 +12,7 @@ namespace MobileApp.Models.DTOs
         public string ExperienceLevel { get; set; }
         public string PersonalBio { get; set; }
         public string ImageUrl { get; set; }
+        public int PartySize { get; set; }
         public PartyDTO Party { get; set; }
         public List<RequestDTO> ActiveRequests { get; set; }
     }

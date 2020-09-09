@@ -27,7 +27,9 @@ namespace MobileApp.Views
     {
         private string DMApiUrl = $"{App.ApiUrl}/DungeonMasters";
         private string ImageApiUrl = $"{App.ApiUrl}/UserImages";
+
         private MediaFile _imageUpload;
+
         public ObservableCollection<ExperienceLevel> _ExperienceList;
 
 
@@ -75,6 +77,7 @@ namespace MobileApp.Views
                 };
                 _imageUpload = await CrossMedia.Current.PickPhotoAsync();
                 if (_imageUpload == null) return;
+
                 // TODO: Show the User their image before submitting?
                 // imageView.Source = ImageSource.FromStream(() => _imageUpload.GetStream());
             }
@@ -107,75 +110,80 @@ namespace MobileApp.Views
                 }
                 return "";
             }
-
-            //var account = new CloudStorageAccount();
-            //var client = account.CreateCloudBlobClient();
-            //var container = client.GetContainerReference("images");
-            //await container.CreateIfNotExistsAsync();
-            //var name = Guid.NewGuid().ToString();
-            //var blockBlob = container.GetBlockBlobReference($"{name}.png");
-            //await blockBlob.UploadFromStreamAsync(stream);
-            //var URL = blockBlob.Uri.OriginalString;
-            //await DisplayAlert("Uploaded", "Image uploaded to Blob Storage Successfully!", "OK");
         }
 
         private async void OnSubmit(object sender, EventArgs e)
         {
+            Busy();
             if (_imageUpload == null)
             {
                 await DisplayAlert("Upload Image", "We need an image of your character!", "X");
                 return;
             };
-            DungeonMasterDTO newDm = new DungeonMasterDTO
+
+            var imageUploadResult = await SendImageToAPI(App.UserName);
+
+            if (imageUploadResult != "")
             {
-                CampaignName = campaignNameEntry.Text,
-                CampaignDesc = CampaignDescription.Text,
-                ExperienceLevel = ((ExperienceLevel)
-                SelectedExperience.SelectedItem).ToString(),
-                PersonalBio = PersonalBio.Text
-            };
-            HttpClient client = new HttpClient();
-
-
-            string dmJson = JsonConvert.SerializeObject(newDm);
-
-            HttpContent content = new StringContent(dmJson);
-
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.UserToken);
-
-            HttpResponseMessage result = await client.PostAsync(DMApiUrl, content);
-
-            if (result.StatusCode == HttpStatusCode.OK)
-            {
-                var dmString = await result.Content.ReadAsStringAsync();
-                var dm = JsonConvert.DeserializeObject<DungeonMasterDTO>(dmString);
-                App.CurrentDM = dm;
-                App.CurrentPlayer = null;
-
-                var imageUploadResult = await SendImageToAPI(dm.UserName);
-                if (imageUploadResult != "")
+                DungeonMasterDTO newDm = new DungeonMasterDTO
                 {
-                    dm.ImageUrl = imageUploadResult;
+                    CampaignName = campaignNameEntry.Text,
+                    CampaignDesc = CampaignDescription.Text,
+                    ExperienceLevel = ((ExperienceLevel)
+                    SelectedExperience.SelectedItem).ToString(),
+                    PersonalBio = PersonalBio.Text,
+                    ImageUrl = imageUploadResult
+                };
+                HttpClient client = new HttpClient();
 
-                    await DisplayAlert("Success!", "Dungeon Master created successfully, start building that party!", "OK");
-                    Application.Current.MainPage = new AppShell();
+
+                string dmJson = JsonConvert.SerializeObject(newDm);
+
+                HttpContent content = new StringContent(dmJson);
+
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.UserToken);
+
+                HttpResponseMessage result = await client.PostAsync(DMApiUrl, content);
+
+                NotBusy();
+
+                if (result.StatusCode == HttpStatusCode.OK)
+                {
+                    var dmString = await result.Content.ReadAsStringAsync();
+                    var dm = JsonConvert.DeserializeObject<DungeonMasterDTO>(dmString);
+                    App.CurrentDM = dm;
+                    App.CurrentPlayer = null;
+                    App.Current.MainPage = new AppShell();
                 }
                 else
                 {
-                    int dmId = dm.Id;
-                    var deleteResult = await client.DeleteAsync($"{DMApiUrl}/{dmId}");
-                    App.CurrentDM = null;
-                    await DisplayAlert("Oh No!", "The image upload didn't work. Please try again.", "OK");
+                    await DisplayAlert("Oh No!", "Something went wrong creating your DM. Please try again.", "OK");
                 }
             }
             else
             {
-                await DisplayAlert("Oh No!", "Something went wrong creating your character. Please try again.", "OK");
-
+                NotBusy();
+                await DisplayAlert("Oh No!", "Something went wrong uploading your image. Please try again.", "OK");
             }
         }
 
+
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
+            ButtonSelectPic.IsEnabled = false;
+            SubmitButton.IsEnabled = false;
+        }
+
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+            ButtonSelectPic.IsEnabled = true;
+            SubmitButton.IsEnabled = true;
+        }
     }
 }

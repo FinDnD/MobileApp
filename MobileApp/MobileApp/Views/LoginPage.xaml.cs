@@ -105,6 +105,7 @@ namespace MobileApp.Views
                 App.CurrentPlayer = JsonConvert.DeserializeObject<PlayerDTO>(rawPlayer);
                 App.CurrentDM = null;
                 App.UserId = App.CurrentPlayer.UserId;
+                App.UserName = Entry_Name.Text;
                 return true;
             }
             else

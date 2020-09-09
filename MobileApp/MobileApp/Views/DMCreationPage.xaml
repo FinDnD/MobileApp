@@ -36,6 +36,8 @@
                             >
                 </Picker>
 
+                <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="DodgerBlue" />
+
                 <!--Campaign Description-->
                     <Label Margin="10,0,10,0"
                                Text="Campaign Description" 
@@ -67,7 +69,7 @@
                     <Button Grid.Row="5" 
                             x:Name="ButtonSelectPic" 
                             Grid.Column="0" 
-                            Text="Upload Image"
+                            Text="UPLOAD IMAGE"
                             Clicked="btnSelectPic_Clicked"
                             BackgroundColor="#e3e3e3" 
                             TextColor="#9D0A0E"
@@ -76,6 +78,7 @@
 
                     <!--Save Button-->
                     <Button Grid.Row="6" 
+                            x:Name="SubmitButton"
                             Text="CREATE DUNGEON MASTER" 
                             BackgroundColor="#9D0A0E" 
                             TextColor="White" 

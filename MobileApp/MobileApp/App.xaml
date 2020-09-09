@@ -11,7 +11,15 @@
  
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#2196F3</Color>
+            <Color x:Key="Primary">#333333</Color>
+            <Color x:Key="PrimaryLight">#e3e3e3</Color>
+            <Color x:Key="AccentRed">#9D0A0E</Color>
+            <Style TargetType="TabbedPage">
+                <Setter Property="BarBackgroundColor" Value="Black"/>
+            </Style>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="Black"/>
+            </Style>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">
@@ -19,7 +27,7 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                    <Setter Property="BackgroundColor" Value="{StaticResource AccentRed}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Disabled">

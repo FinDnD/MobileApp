@@ -54,6 +54,8 @@
                         SelectedItem="{Binding SelectedClass}">
                 </Picker>
                 <!--SelectedIndexChanged="OnPickerSelectedIndexChanged"-->
+                
+                <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="DodgerBlue" />
 
                 <!--Race Picker-->
                 <Picker Grid.Row="3" 
@@ -113,17 +115,20 @@
                 <Button Grid.Row="7" 
                         x:Name="ButtonSelectPic" 
                         Grid.Column="0" 
-                        Text="Select picture"
+                        Text="UPLOAD IMAGE"
                         BackgroundColor="#e3e3e3" 
+                        Clicked="btnSelectPic_Clicked"
                         TextColor="#9D0A0E"/>
 
 
                 <!--Save Button-->
                 <Button Grid.Row="8" 
-                        Text="SAVE" 
+                        Text="CREATE CHARACTER" 
+                        x:Name="SubmitButton"
                         BackgroundColor="#9D0A0E" 
                         TextColor="White" 
                         HeightRequest="50" 
+                        Clicked="OnSubmit"
                         VerticalOptions="Start" />
 
             </Grid>

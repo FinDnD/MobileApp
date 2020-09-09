@@ -18,6 +18,15 @@ namespace MobileApp.Views
 
         }
 
+        public void CreateContentPage()
+        {
+            var page = new ContentPage();
+
+            var grid = new Grid() {  };
+
+        }
+
+
         void OnToggled(object sender, ToggledEventArgs e)
         {
 

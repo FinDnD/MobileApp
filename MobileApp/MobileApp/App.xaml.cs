@@ -14,6 +14,7 @@ namespace MobileApp
         public static DungeonMasterDTO CurrentDM;
         public static string UserToken;
         public static string UserId;
+        public static string UserName;
 
         // Globals Immutables
         // API Root

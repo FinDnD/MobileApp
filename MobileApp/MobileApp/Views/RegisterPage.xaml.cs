@@ -25,6 +25,7 @@ namespace MobileApp.Views
 
         async void SubmitRegistration(object sender, EventArgs e)
         {
+            Busy();
             RegisterVM registrationInfo = new RegisterVM
             {
                 Email = userEmailEntry.Text,
@@ -57,6 +58,9 @@ namespace MobileApp.Views
                 AccountInfo responseInfo = JsonConvert.DeserializeObject<AccountInfo>(rawToken);
 
                 App.UserToken = responseInfo.Jwt;
+                App.UserName = userNameEntry.Text;
+
+                NotBusy();
 
                 if (profileType)
                 {
@@ -69,6 +73,7 @@ namespace MobileApp.Views
             }
             else
             {
+                NotBusy();
                 await DisplayAlert("Error", "Looks like something went wrong, make sure all the info is sound!", "X");
             }
         }
@@ -77,6 +82,22 @@ namespace MobileApp.Views
         void ReturnToLogin(object sender, EventArgs e)
         {
             Application.Current.MainPage = new LoginPage();
+        }
+
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
+            RegisterButton.IsEnabled = false;
+            BackToLoginButton.IsEnabled = false;
+        }
+
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+            RegisterButton.IsEnabled = true;
+            BackToLoginButton.IsEnabled = true;
         }
     }
 

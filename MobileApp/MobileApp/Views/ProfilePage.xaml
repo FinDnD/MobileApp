@@ -5,9 +5,9 @@
             x:Class="MobileApp.Views.ProfilePage">
 
     <!--Pages can be added as references or in-line-->
-    <ContentPage Title="My Character" IconImageSource="SettingsIcon.png">
+    <ContentPage x:Name ="ProfileView" Title="My Character" IconImageSource="SettingsIcon.png">
         <ContentPage.Content>
-            <Grid>
+            <Grid x:Name="ProfileGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10*"/>
                     <RowDefinition Height="80*"/>
@@ -19,7 +19,7 @@
                     <Image Source="dice_icon50.png" 
                            VerticalOptions="Center" />
 
-                    <Label Text="My Character" 
+                    <Label Text="ProfilePage.xaml" 
                            Padding="0,10,0,0" 
                            FontSize="Large" 
                            HorizontalOptions="Center" 
@@ -27,22 +27,22 @@
 
                 </StackLayout>
                 
-                <StackLayout  Grid.Row="1" Margin="23,0,23,0" Padding="0,80,0,0">
-                        <!--Campaign Name - Text Entry-->
+                <!--<StackLayout  Grid.Row="1" Margin="23,0,23,0" Padding="0,80,0,0">
+                        --><!--Campaign Name - Text Entry--><!--
                         <Label x:Name="campaignNameEntry" 
                                Text="Campaign Name"
                                FontSize="Medium"
                                Margin="0,10,0,0">
                         </Label>
 
-                        <!--Experience Level Picker-->
+                        --><!--Experience Level Picker--><!--
                         <Label x:Name = "SelectedExperience" 
                                Text="Experience Level"
                                FontSize="Medium"
                                Margin="0,10,0,0">
                         </Label>
 
-                        <!--Campaign Description-->
+                        --><!--Campaign Description--><!--
                         <Label Text="Campaign Description" 
                                TextColor="Gray"
                                FontSize="Medium" 
@@ -54,7 +54,7 @@
                                 FontSize="Medium" 
                                 Placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Leo vel fringilla est ullamcorper eget nulla facilisi etiam. Vitae elementum curabitur vitae nunc sed velit dignissim sodales ut. Fusce id velit ut tortor. Cras adipiscing enim eu turpis. Non enim praesent elementum facilisis leo vel fringilla. Suspendisse potenti nullam ac tortor vitae purus. Tristique et egestas quis ipsum suspendisse ultrices gravida. "/>
 
-                        <!--Personal Bio-->
+                        --><!--Personal Bio--><!--
                         <Label Text="Personal Bio" 
                                TextColor="Gray"
                                FontSize="Medium" 
@@ -66,14 +66,14 @@
                                 FontSize="Medium" 
                                 Placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Leo vel fringilla est ullamcorper eget nulla facilisi etiam. Vitae elementum curabitur vitae nunc sed velit dignissim sodales ut. Fusce id velit ut tortor. Cras adipiscing enim eu turpis. Non enim praesent elementum facilisis leo vel fringilla. Suspendisse potenti nullam ac tortor vitae purus. Tristique et egestas quis ipsum suspendisse ultrices gravida. "/>
 
-                        <!--Delete Button-->
+                        --><!--Delete Button--><!--
                         <Button Text="DELETE CHARACTER" 
                                 BackgroundColor="#9D0A0E" 
                                 TextColor="White" 
                                 HeightRequest="50" 
                                 VerticalOptions="Start" 
                                 Margin="0,10,0,0"/>
-                    </StackLayout>
+                    </StackLayout>-->
                     
             </Grid>
         </ContentPage.Content>

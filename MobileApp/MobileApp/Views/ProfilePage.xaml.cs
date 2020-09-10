@@ -15,19 +15,19 @@ namespace MobileApp.Views
         public ProfilePage()
         {
             InitializeComponent();
-            
-            //if (App.CurrentPlayer != null)
-            //{
-            //    Children.Add(CreatePlayerContent);
-            //}
-            //else
-            //{
-            //    Children.Add(CreateDMContent);
-            //}
+
+            if (App.CurrentPlayer != null)
+            {
+                Children.Add(CreatePlayerContent());
+            }
+            else
+            {
+                CreateDMContent();
+            }
 
         }
 
-        public ContentPage CreateDMContent()
+        public void CreateDMContent()
         {
             ContentPage page = new ContentPage();
 
@@ -49,27 +49,28 @@ namespace MobileApp.Views
                 Padding = new Thickness(0, 20, 0, 0)
             };
 
-            Image imageLogo = new Image
-            {
-                Source = "dice.icon50.png",
-                VerticalOptions = LayoutOptions.Center
-            };
-
-            Label labelHeadline = new Label
-            {
-                Text = "My Character",
-                Padding = new Thickness(0, 10, 0, 0),
-                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
-                HorizontalOptions = LayoutOptions.Center,
-                TextColor = Color.White
-            };
-
             StackLayout stackLayout2 = new StackLayout
             {
                 Margin = new Thickness(10, 10, 0, 10),
                 Padding = new Thickness(0, 20, 0, 0)
             };
 
+            Image imageLogo = new Image
+            {
+                Source = "dice.icon50.png",
+                //VerticalOptions = LayoutOptions.Center
+            };
+
+            Label labelHeadline = new Label
+            {
+                Text = "ProfilePage.xaml.cs CreateDMContent",
+                Padding = new Thickness(0, 10, 0, 0),
+                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                HorizontalOptions = LayoutOptions.Center,
+                TextColor = Color.Black
+            };
+
+            
             Label labelCampaign= new Label
             {
                 Text = "Campaign Name",
@@ -133,6 +134,8 @@ namespace MobileApp.Views
             stackLayout1.Children.Add(labelHeadline);
 
             // STACK2
+            //stackLayout2.Children.Add(imageLogo);
+            //stackLayout2.Children.Add(labelHeadline);
             stackLayout2.Children.Add(labelCampaign);
             stackLayout2.Children.Add(labelExperience);
             stackLayout2.Children.Add(labelCampaignDescription);
@@ -142,13 +145,22 @@ namespace MobileApp.Views
             stackLayout2.Children.Add(button);
 
             Grid.SetRow(stackLayout2, 1);
+
+            ProfileGrid.Children.Add(stackLayout2);
+
+            //Grid.SetRow(stackLayout1, 0);
+            //Grid.SetRow(stackLayout2, 1);
             //Grid.SetRow((BindableObject)view, row);
 
             //GRID
-            grid.Children.Add(stackLayout1);
-            grid.Children.Add(stackLayout2);
+            //grid.Children.Add(stackLayout1);
+            //grid.Children.Add(stackLayout2);
 
-            return page;
+            //page.Content = grid;
+
+            //page.IconImageSource = "SettingsIcon.png";
+
+            //return page;
         }
 
 
@@ -182,7 +194,7 @@ namespace MobileApp.Views
 
             Label labelHeadline = new Label
             {
-                Text = "My Character",
+                Text = "ProfilePage.xaml.cs Player!!!",
                 Padding = new Thickness(0, 10, 0, 0),
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 HorizontalOptions = LayoutOptions.Center,
@@ -197,7 +209,7 @@ namespace MobileApp.Views
 
             Label labelCampaign = new Label
             {
-                Text = "Campaign Name",
+                Text = "ProfilePage.xaml.cs Player!!!",
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
@@ -266,12 +278,15 @@ namespace MobileApp.Views
             stackLayout2.Children.Add(editorPersonalBio);
             stackLayout2.Children.Add(button);
 
-            Grid.SetRow(stackLayout2, 1);
+            //Grid.SetRow(stackLayout1, 0);
+            //Grid.SetRow(stackLayout2, 1);
             //Grid.SetRow((BindableObject)view, row);
 
             //GRID
             grid.Children.Add(stackLayout1);
-            grid.Children.Add(stackLayout2);
+            //grid.Children.Add(stackLayout2);
+
+            page.Content = grid;
 
             return page;
         }

@@ -140,7 +140,6 @@ namespace MobileApp.Views
                 {
                     await DisplayAlert("Matched!", "A new player has joined your party!", "X");
                 }
-
             }
         }
 

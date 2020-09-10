@@ -7,7 +7,7 @@
             BarTextColor="{StaticResource Primary}">
 
     <!--Pages can be added as references or in-line-->
-    <ContentPage x:Name ="ProfileView" Title="My Character" IconImageSource="dragon_icon_25.png">
+    <ContentPage x:Name ="ProfileView" Title="My Character" IconImageSource="hat_icon_25.png">
         <ContentPage.Content>
             <Grid x:Name="ProfileGrid">
                 <Grid.RowDefinitions>

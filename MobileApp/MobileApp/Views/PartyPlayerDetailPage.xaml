@@ -4,8 +4,9 @@
              x:Class="MobileApp.Views.PartyPlayerDetailPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="Name" />
-            <Label x:Name="Race" />
+            <Label x:Name="Name" Text="{Binding UserName}" />
+            <Label x:Name="Race" Text="{Binding Race}"/>
+            <Label x:Name="Class" Text="{Binding Class}"></Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

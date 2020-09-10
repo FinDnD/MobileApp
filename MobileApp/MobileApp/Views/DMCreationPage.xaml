@@ -12,8 +12,6 @@
                 <Label Text="Create Your Dungeon Master" Padding="0,10,0,0" FontSize="Large" HorizontalOptions="Center" TextColor="Black" />
             </StackLayout>
                 
-
-
                 <StackLayout Margin="20">
                     <!--Campaign Name - Text Entry-->
                     <Entry Grid.Row="1" 

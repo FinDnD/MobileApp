@@ -1,5 +1,6 @@
 ﻿using MLToolkit.Forms.SwipeCardView.Core;
 using MobileApp.Models.DTOs;
+using MobileApp.Models.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,6 @@ namespace MobileApp.Views
         public List<UserProfile> _Profiles = new List<UserProfile>();
         public List<RequestDTO> _Requests = new List<RequestDTO>();
         public string APIRoute = $"{App.ApiUrl}/Swipes";
-        public int CurrentRequestIndex;
 
         public ICommand SwipedCommand { get; }
 
@@ -40,7 +40,7 @@ namespace MobileApp.Views
         /// </summary>
         public void CardBinding()
         {
-            // If the Current User has a Player assigned to them, the Requests will be built off of the DungeonMasters in their ActiveRequests list
+            // If the Current User has a Player assigned to them, the Profiles will be built off of the DungeonMasters in their ActiveRequests list
             if (App.CurrentPlayer != null)
             {
                 foreach (RequestDTO request in App.CurrentPlayer.ActiveRequests)
@@ -55,7 +55,8 @@ namespace MobileApp.Views
                 }
                 _Requests = App.CurrentPlayer.ActiveRequests;
             }
-            // If the Current User has a Dungeon Master assigned to them, the Requests will be built off of the Players in their ActiveRequests list
+            
+            // If the Current User has a Dungeon Master assigned to them, the Profiles will be built off of the Players in their ActiveRequests list
             else
             {
                 foreach (RequestDTO request in App.CurrentDM.ActiveRequests)
@@ -70,7 +71,6 @@ namespace MobileApp.Views
                 }
                 _Requests = App.CurrentDM.ActiveRequests;
             }
-            CurrentRequestIndex = 0;
         }
 
         /// <summary>
@@ -91,24 +91,20 @@ namespace MobileApp.Views
         /// <param name="e">Event details for the Swipe </param>
         public async void OnSwiped(SwipedCardEventArgs e)
         {
-            UserProfile profile = (UserProfile)e.Item;
-            RequestDTO request = _Requests.Where(x => x.DungeonMaster.UserName == profile.UserName || x.Player.UserName == profile.UserName).FirstOrDefault();
-
+            var request = _Requests[0];
+            _Requests.RemoveAt(0);
             switch (e.Direction)
             {
                 case SwipeCardDirection.None:
                     break;
                 case SwipeCardDirection.Right:
                     await HandleSwipeRight(request);
-                    CurrentRequestIndex++;
                     break;
                 case SwipeCardDirection.Left:
                     await HandleSwipeLeft(request);
-                    CurrentRequestIndex++;
                     break;
                 case SwipeCardDirection.Up:
                     await HandleSwipeUp(request);
-                    CurrentRequestIndex++;
                     break;
             }
         }
@@ -128,7 +124,7 @@ namespace MobileApp.Views
                 request.DungeonMasterAccepted = true;
             }
 
-            await PutRequest(request);
+            var response = await PutRequest(request);
 
             if (request.PlayerAccepted && request.DungeonMasterAccepted)
             {
@@ -150,7 +146,7 @@ namespace MobileApp.Views
             await PutRequest(request);
         }
 
-        private async Task PutRequest(RequestDTO request)
+        private async Task<HttpResponseMessage> PutRequest(RequestDTO request)
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.UserToken);
@@ -162,6 +158,8 @@ namespace MobileApp.Views
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             HttpResponseMessage response = await client.PutAsync(APIRoute, content);
+
+            return response;
         }
 
 
@@ -191,9 +189,14 @@ namespace MobileApp.Views
             SwipeCard.InvokeSwipe(SwipeCardDirection.Right);
         }
 
+        /// <summary>
+        /// When a user clicks the info button this method displays the current Profiles information
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void OnInfoClicked(object sender, EventArgs e)
         {
-            RequestDTO request = _Requests[CurrentRequestIndex];
+            RequestDTO request = _Requests[0];
             if (App.CurrentPlayer != null)
             {
                 DungeonMasterDTO dm = request.DungeonMaster;
@@ -206,6 +209,11 @@ namespace MobileApp.Views
             }
         }
 
+        /// <summary>
+        /// Logs the user out and sets all App Info to null
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Logout(object sender, EventArgs e)
         {
             App.CurrentDM = null;
@@ -216,14 +224,5 @@ namespace MobileApp.Views
             Application.Current.MainPage = new LoginPage();
         }
 
-
-
-        public class UserProfile
-        {
-            public string ProfileType { get; set; }
-            public string UserName { get; set; }
-            public string ExperienceLevel { get; set; }
-            public string Image { get; set; }
-        }
     }
 }

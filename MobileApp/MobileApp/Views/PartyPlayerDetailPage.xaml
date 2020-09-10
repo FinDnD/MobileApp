@@ -4,9 +4,8 @@
              x:Class="MobileApp.Views.PartyPlayerDetailPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label x:Name="Name" />
+            <Label x:Name="Race" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

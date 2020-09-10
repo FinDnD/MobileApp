@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MobileApp.Models.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,11 @@ namespace MobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PartyPlayerDetailPage : ContentPage
     {
-        public PartyPlayerDetailPage()
+        public PartyPlayerDetailPage(PartyPlayerDTO partyPlayer)
         {
             InitializeComponent();
+            Name.Text = partyPlayer.CharacterName;
+            Race.Text = partyPlayer.Race;
         }
     }
 }

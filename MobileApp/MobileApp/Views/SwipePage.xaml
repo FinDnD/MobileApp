@@ -5,7 +5,12 @@
              xmlns:swipeCardView="clr-namespace:MLToolkit.Forms.SwipeCardView;assembly=MLToolkit.Forms.SwipeCardView"
              xmlns:system="clr-namespace:System;assembly=netstandard"
              Title="Home">
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Logout"
+                     Order="Primary"
+                     Priority="0"
+                     Clicked="Logout"/>
+    </ContentPage.ToolbarItems>
 
     <RefreshView>
         <StackLayout>
@@ -28,13 +33,18 @@
                                 <AbsoluteLayout>
                                     <Image Source="{Binding Image}" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" AbsoluteLayout.LayoutFlags="All"></Image>
 
-                                    <Label FontSize="Large" FontAttributes="Bold" TextColor="Red" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0.1, 0.95, 150, 30" AbsoluteLayout.LayoutFlags="PositionProportional" >
+                                    <Label FontSize="Large" FontAttributes="Bold" TextColor="Red" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0.05, 0.8, 150, 30" AbsoluteLayout.LayoutFlags="PositionProportional" >
                                         <Label.FormattedText>
-                                            <FormattedString x:Name="CardContent">
-                                                <Span Text="{Binding UserName}" />
-                                                <Span Text="{x:Static system:Environment.NewLine}"/>
-                                                <Span>Experience Level: </Span>
-                                                <Span Text="{Binding ExperienceLevel}" />
+                                            <FormattedString >
+                                                <Span Text="{Binding UserName}"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>   
+                                    <Label FontSize="Large" FontAttributes="Bold" TextColor="Red" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0.05, 0.9, 150, 30" AbsoluteLayout.LayoutFlags="PositionProportional" >
+                                        <Label.FormattedText>
+                                            <FormattedString >
+                                                <Span Text="Experience: "></Span>
+                                                <Span Text="{Binding ExperienceLevel}"></Span>
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>

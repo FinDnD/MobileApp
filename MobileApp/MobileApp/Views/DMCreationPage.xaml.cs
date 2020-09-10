@@ -114,12 +114,12 @@ namespace MobileApp.Views
 
         private async void OnSubmit(object sender, EventArgs e)
         {
-            Busy();
             if (_imageUpload == null)
             {
                 await DisplayAlert("Upload Image", "We need an image of your character!", "X");
                 return;
             };
+            Busy();
 
             var imageUploadResult = await SendImageToAPI(App.UserName);
 

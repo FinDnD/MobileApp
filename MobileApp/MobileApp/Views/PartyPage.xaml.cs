@@ -1,5 +1,4 @@
 ﻿using MobileApp.Models.DTOs;
-using MobileApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

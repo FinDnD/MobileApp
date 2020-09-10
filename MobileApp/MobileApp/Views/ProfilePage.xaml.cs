@@ -18,7 +18,7 @@ namespace MobileApp.Views
 
             if (App.CurrentPlayer != null)
             {
-                Children.Add(CreatePlayerContent());
+                CreatePlayerContent();
             }
             else
             {
@@ -141,54 +141,46 @@ namespace MobileApp.Views
                 Padding = new Thickness(0, 70, 0, 0)
             };
 
-            Label labelCampaign = new Label
+            Label labelCharacterName = new Label
             {
-                Text = $"Campaign Name: {App.CurrentDM.CampaignName}",
+                Text = $"Character Name: {App.CurrentPlayer.CharacterName}",
+                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                Margin = new Thickness(10, 10, 0, 10)
+            };
+
+            Label labelClass = new Label
+            {
+                Text = $"Class: {App.CurrentPlayer.Race}",
+                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                Margin = new Thickness(10, 10, 0, 10)
+            };
+
+            Label labelRace = new Label
+            {
+                Text = $"Race: {App.CurrentPlayer.Race}",
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
 
             Label labelExperience = new Label
             {
-                Text = $"Experience Level: {App.CurrentDM.ExperienceLevel}",
+                Text = $"Experience Level: {App.CurrentPlayer.ExperienceLevel}",
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
 
-            Label labelCampaignDescription = new Label
+            Label labelGoodAlignment = new Label
             {
-                Text = "Campaign Description",
-                TextColor = Color.Gray,
+                Text = $"Good Alignment: {App.CurrentPlayer.GoodAlignment}",
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
-                HorizontalOptions = LayoutOptions.Start,
-                Margin = new Thickness(10, 10, 0, 0)
+                Margin = new Thickness(10, 10, 0, 10)
             };
 
-            Label editorCampaignDescription = new Label
+            Label labelLawfulAlignment = new Label
             {
-                TextColor = Color.Gray,
-                HeightRequest = 80,
+                Text = $"Lawful Alignment Level: {App.CurrentPlayer.LawAlignment}",
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
-                Text = App.CurrentDM.CampaignDesc,
-                Margin = new Thickness(10, 5, 0, 0)
-            };
-
-            Label labelPersonalBio = new Label
-            {
-                Text = "Personal Bio",
-                TextColor = Color.Gray,
-                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
-                HorizontalOptions = LayoutOptions.Start,
-                Margin = new Thickness(10, 10, 0, 0)
-            };
-
-            Label editorPersonalBio = new Label
-            {
-                TextColor = Color.Gray,
-                HeightRequest = 80,
-                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
-                Text = App.CurrentDM.PersonalBio,
-                Margin = new Thickness(10, 5, 0, 0)
+                Margin = new Thickness(10, 10, 0, 10)
             };
 
             Button button = new Button
@@ -201,12 +193,12 @@ namespace MobileApp.Views
                 Margin = new Thickness(0, 10, 0, 0)
             };
 
-            stackLayout.Children.Add(labelCampaign);
+            stackLayout.Children.Add(labelCharacterName);
+            stackLayout.Children.Add(labelClass);
+            stackLayout.Children.Add(labelRace);
             stackLayout.Children.Add(labelExperience);
-            stackLayout.Children.Add(labelCampaignDescription);
-            stackLayout.Children.Add(editorCampaignDescription);
-            stackLayout.Children.Add(labelPersonalBio);
-            stackLayout.Children.Add(editorPersonalBio);
+            stackLayout.Children.Add(labelGoodAlignment);
+            stackLayout.Children.Add(labelLawfulAlignment);
             stackLayout.Children.Add(button);
 
             Grid.SetRow(stackLayout, 1);

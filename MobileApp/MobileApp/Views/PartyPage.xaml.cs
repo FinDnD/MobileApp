@@ -15,52 +15,51 @@ namespace MobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PartyPage : ContentPage
     {
-      
-        List<PartyPlayerDTO> PartyMembers;
-        public string Campaign{ get; set; }
+
+        public List<PartyPlayerDTO> _PartyMembers;
+        public string Campaign { get; set; }
+        public string CampaignImage { get; set; }
 
         public PartyPage()
         {
             InitializeComponent();
             MyPartyMembers();
 
-            LabelCampaign.Text = "Attack on Titans";
-         
-          
+
+            if (App.CurrentPlayer != null)
+            {
+                LabelCampaign.Text = App.CurrentPlayer.Party.DungeonMasterDTO.CampaignName;
+                CampaignImage = App.CurrentPlayer.Party.DungeonMasterDTO.ImageUrl;
+                _PartyMembers = App.CurrentPlayer.Party.PlayersInParty;
+            }
+            else
+            {
+                LabelCampaign.Text = App.CurrentDM.CampaignName;
+                CampaignImage = App.CurrentDM.ImageUrl;
+                _PartyMembers = App.CurrentDM.Party.PlayersInParty;
+            }
+            BindingContext = this;
         }
+
+        public List<PartyPlayerDTO> PartyMembers
+        {
+            get => _PartyMembers;
+            set 
+            {
+                _PartyMembers = value;
+            }
+        }
+
         void MyPartyMembers()
         {
-           
-            PartyMembers = new List<PartyPlayerDTO>();
-            PartyMembers.Add(new PartyPlayerDTO
+            if (App.CurrentPlayer != null)
             {
-                CharacterName = "Mortae",
-                Race = "Alien",
-            });
-            PartyMembers.Add(new PartyPlayerDTO
+                _PartyMembers = App.CurrentPlayer.Party.PlayersInParty;
+            }
+            else
             {
-                CharacterName = "Lantae",
-                Race = "Alien",
-            });
-            PartyMembers.Add(new PartyPlayerDTO
-            {
-                CharacterName = "Mort",
-                Race = "Rip",
-            });
-            PartyMembers.Add(new PartyPlayerDTO
-            {
-                CharacterName = "tae",
-                Race = "Dip",
-            });
-            PartyMembers.Add(new PartyPlayerDTO
-            {
-                CharacterName = "Draco",
-                Race = "Nymph",
-            });
-
-            MyParty.ItemsSource = PartyMembers;
-
-           
+                _PartyMembers = App.CurrentDM.Party.PlayersInParty;
+            }
         }
 
         async void PlayerMemberInfo(object sender, ItemTappedEventArgs e)
@@ -69,22 +68,21 @@ namespace MobileApp.Views
             if (e.Item != null)
             {
                 bool confirmation = await DisplayAlert("", "Do you want to view member's details", "Yes", "No");
-                if(confirmation)
+                if (confirmation)
                 {
-                PartyPlayerDTO P = (PartyPlayerDTO)e.Item;
-                await Navigation.PushAsync(new PartyPlayerDetailPage(P));
+                    PartyPlayerDTO selectedPlayer = (PartyPlayerDTO)e.Item;
+                    await Navigation.PushAsync(new PartyPlayerDetailPage(selectedPlayer));
                 }
                 else
                 {
 
-                 ((ListView)sender).SelectedItem = null;
+                    ((ListView)sender).SelectedItem = null;
                 }
             }
-            else
-            return;
+            else return;
 
         }
 
-    
+
     }
 }

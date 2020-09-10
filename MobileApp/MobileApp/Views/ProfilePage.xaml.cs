@@ -41,46 +41,22 @@ namespace MobileApp.Views
                 }
             };
 
-            StackLayout stackLayout1 = new StackLayout
+            StackLayout stackLayout = new StackLayout
             {
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.Center,
-                Margin = new Thickness(10, 10, 0, 10),
-                Padding = new Thickness(0, 20, 0, 0)
+                Margin = new Thickness(20, 0, 20, 0),
+                Padding = new Thickness(0, 70, 0, 0)
             };
-
-            StackLayout stackLayout2 = new StackLayout
-            {
-                Margin = new Thickness(10, 10, 0, 10),
-                Padding = new Thickness(0, 20, 0, 0)
-            };
-
-            Image imageLogo = new Image
-            {
-                Source = "dice.icon50.png",
-                //VerticalOptions = LayoutOptions.Center
-            };
-
-            Label labelHeadline = new Label
-            {
-                Text = "ProfilePage.xaml.cs CreateDMContent",
-                Padding = new Thickness(0, 10, 0, 0),
-                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
-                HorizontalOptions = LayoutOptions.Center,
-                TextColor = Color.Black
-            };
-
             
             Label labelCampaign= new Label
             {
-                Text = "Campaign Name",
+                Text = $"Campaign Name: {App.CurrentDM.CampaignName}",
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
 
             Label labelExperience = new Label
             {
-                Text = "Experience Level",
+                Text = $"Experience Level: {App.CurrentDM.ExperienceLevel}",
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
@@ -91,15 +67,16 @@ namespace MobileApp.Views
                 TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 HorizontalOptions = LayoutOptions.Start,
-                Margin = new Thickness(0, 10, 0, 0)
+                Margin = new Thickness(10, 10, 0, 0)
             };
 
-            Editor editorCampaignDescription = new Editor
+            Label editorCampaignDescription = new Label
             {
                 TextColor = Color.Gray,
                 HeightRequest = 80,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
-                Placeholder  = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Leo vel fringilla est ullamcorper eget nulla facilisi etiam. Vitae elementum curabitur vitae nunc sed velit dignissim sodales ut. Fusce id velit ut tortor. Cras adipiscing enim eu turpis. Non enim praesent elementum facilisis leo vel fringilla. Suspendisse potenti nullam ac tortor vitae purus. Tristique et egestas quis ipsum suspendisse ultrices gravida."
+                Text = App.CurrentDM.CampaignDesc,
+                Margin = new Thickness(10, 5, 0, 0)
             };
 
             Label labelPersonalBio = new Label
@@ -108,15 +85,16 @@ namespace MobileApp.Views
                 TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 HorizontalOptions = LayoutOptions.Start,
-                Margin = new Thickness(0, 10, 0, 0)
+                Margin = new Thickness(10, 10, 0, 0)
             };
 
-            Editor editorPersonalBio = new Editor
+            Label editorPersonalBio = new Label
             {
                 TextColor = Color.Gray,
                 HeightRequest = 80,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
-                Placeholder = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Leo vel fringilla est ullamcorper eget nulla facilisi etiam. Vitae elementum curabitur vitae nunc sed velit dignissim sodales ut. Fusce id velit ut tortor. Cras adipiscing enim eu turpis. Non enim praesent elementum facilisis leo vel fringilla. Suspendisse potenti nullam ac tortor vitae purus. Tristique et egestas quis ipsum suspendisse ultrices gravida."
+                Text = App.CurrentDM.PersonalBio,
+                Margin = new Thickness(10, 5, 0, 0)
             };
 
             Button button = new Button
@@ -129,42 +107,21 @@ namespace MobileApp.Views
                 Margin = new Thickness(0, 10, 0, 0)
             };
 
-            // STACK1
-            stackLayout1.Children.Add(imageLogo);
-            stackLayout1.Children.Add(labelHeadline);
+            stackLayout.Children.Add(labelCampaign);
+            stackLayout.Children.Add(labelExperience);
+            stackLayout.Children.Add(labelCampaignDescription);
+            stackLayout.Children.Add(editorCampaignDescription);
+            stackLayout.Children.Add(labelPersonalBio);
+            stackLayout.Children.Add(editorPersonalBio);
+            stackLayout.Children.Add(button);
 
-            // STACK2
-            //stackLayout2.Children.Add(imageLogo);
-            //stackLayout2.Children.Add(labelHeadline);
-            stackLayout2.Children.Add(labelCampaign);
-            stackLayout2.Children.Add(labelExperience);
-            stackLayout2.Children.Add(labelCampaignDescription);
-            stackLayout2.Children.Add(editorCampaignDescription);
-            stackLayout2.Children.Add(labelPersonalBio);
-            stackLayout2.Children.Add(editorPersonalBio);
-            stackLayout2.Children.Add(button);
+            Grid.SetRow(stackLayout, 1);
 
-            Grid.SetRow(stackLayout2, 1);
-
-            ProfileGrid.Children.Add(stackLayout2);
-
-            //Grid.SetRow(stackLayout1, 0);
-            //Grid.SetRow(stackLayout2, 1);
-            //Grid.SetRow((BindableObject)view, row);
-
-            //GRID
-            //grid.Children.Add(stackLayout1);
-            //grid.Children.Add(stackLayout2);
-
-            //page.Content = grid;
-
-            //page.IconImageSource = "SettingsIcon.png";
-
-            //return page;
+            ProfileGrid.Children.Add(stackLayout);
         }
 
 
-        public ContentPage CreatePlayerContent()
+        public void CreatePlayerContent()
         {
             ContentPage page = new ContentPage();
 
@@ -178,45 +135,22 @@ namespace MobileApp.Views
                 }
             };
 
-            StackLayout stackLayout1 = new StackLayout
+            StackLayout stackLayout = new StackLayout
             {
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.Center,
-                Margin = new Thickness(10, 10, 0, 10),
-                Padding = new Thickness(0, 20, 0, 0)
-            };
-
-            Image imageLogo = new Image
-            {
-                Source = "dice.icon50.png",
-                VerticalOptions = LayoutOptions.Center
-            };
-
-            Label labelHeadline = new Label
-            {
-                Text = "ProfilePage.xaml.cs Player!!!",
-                Padding = new Thickness(0, 10, 0, 0),
-                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
-                HorizontalOptions = LayoutOptions.Center,
-                TextColor = Color.White
-            };
-
-            StackLayout stackLayout2 = new StackLayout
-            {
-                Margin = new Thickness(10, 10, 0, 10),
-                Padding = new Thickness(0, 20, 0, 0)
+                Margin = new Thickness(20, 0, 20, 0),
+                Padding = new Thickness(0, 70, 0, 0)
             };
 
             Label labelCampaign = new Label
             {
-                Text = "ProfilePage.xaml.cs Player!!!",
+                Text = $"Campaign Name: {App.CurrentDM.CampaignName}",
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
 
             Label labelExperience = new Label
             {
-                Text = "Experience Level",
+                Text = $"Experience Level: {App.CurrentDM.ExperienceLevel}",
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
@@ -227,15 +161,16 @@ namespace MobileApp.Views
                 TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 HorizontalOptions = LayoutOptions.Start,
-                Margin = new Thickness(0, 10, 0, 0)
+                Margin = new Thickness(10, 10, 0, 0)
             };
 
-            Editor editorCampaignDescription = new Editor
+            Label editorCampaignDescription = new Label
             {
                 TextColor = Color.Gray,
                 HeightRequest = 80,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
-                Placeholder = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Leo vel fringilla est ullamcorper eget nulla facilisi etiam. Vitae elementum curabitur vitae nunc sed velit dignissim sodales ut. Fusce id velit ut tortor. Cras adipiscing enim eu turpis. Non enim praesent elementum facilisis leo vel fringilla. Suspendisse potenti nullam ac tortor vitae purus. Tristique et egestas quis ipsum suspendisse ultrices gravida."
+                Text = App.CurrentDM.CampaignDesc,
+                Margin = new Thickness(10, 5, 0, 0)
             };
 
             Label labelPersonalBio = new Label
@@ -244,15 +179,16 @@ namespace MobileApp.Views
                 TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 HorizontalOptions = LayoutOptions.Start,
-                Margin = new Thickness(0, 10, 0, 0)
+                Margin = new Thickness(10, 10, 0, 0)
             };
 
-            Editor editorPersonalBio = new Editor
+            Label editorPersonalBio = new Label
             {
                 TextColor = Color.Gray,
                 HeightRequest = 80,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
-                Placeholder = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Leo vel fringilla est ullamcorper eget nulla facilisi etiam. Vitae elementum curabitur vitae nunc sed velit dignissim sodales ut. Fusce id velit ut tortor. Cras adipiscing enim eu turpis. Non enim praesent elementum facilisis leo vel fringilla. Suspendisse potenti nullam ac tortor vitae purus. Tristique et egestas quis ipsum suspendisse ultrices gravida."
+                Text = App.CurrentDM.PersonalBio,
+                Margin = new Thickness(10, 5, 0, 0)
             };
 
             Button button = new Button
@@ -265,30 +201,17 @@ namespace MobileApp.Views
                 Margin = new Thickness(0, 10, 0, 0)
             };
 
-            // STACK1
-            stackLayout1.Children.Add(imageLogo);
-            stackLayout1.Children.Add(labelHeadline);
+            stackLayout.Children.Add(labelCampaign);
+            stackLayout.Children.Add(labelExperience);
+            stackLayout.Children.Add(labelCampaignDescription);
+            stackLayout.Children.Add(editorCampaignDescription);
+            stackLayout.Children.Add(labelPersonalBio);
+            stackLayout.Children.Add(editorPersonalBio);
+            stackLayout.Children.Add(button);
 
-            // STACK2
-            stackLayout2.Children.Add(labelCampaign);
-            stackLayout2.Children.Add(labelExperience);
-            stackLayout2.Children.Add(labelCampaignDescription);
-            stackLayout2.Children.Add(editorCampaignDescription);
-            stackLayout2.Children.Add(labelPersonalBio);
-            stackLayout2.Children.Add(editorPersonalBio);
-            stackLayout2.Children.Add(button);
+            Grid.SetRow(stackLayout, 1);
 
-            //Grid.SetRow(stackLayout1, 0);
-            //Grid.SetRow(stackLayout2, 1);
-            //Grid.SetRow((BindableObject)view, row);
-
-            //GRID
-            grid.Children.Add(stackLayout1);
-            //grid.Children.Add(stackLayout2);
-
-            page.Content = grid;
-
-            return page;
+            ProfileGrid.Children.Add(stackLayout);
         }
 
         void OnToggled(object sender, ToggledEventArgs e)

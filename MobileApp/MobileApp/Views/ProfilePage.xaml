@@ -2,10 +2,12 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             Title="My Profile"
-            x:Class="MobileApp.Views.ProfilePage">
+            x:Class="MobileApp.Views.ProfilePage"
+            BarBackgroundColor="{StaticResource PrimaryLight}"
+            BarTextColor="{StaticResource Primary}">
 
     <!--Pages can be added as references or in-line-->
-    <ContentPage x:Name ="ProfileView" Title="My Character" IconImageSource="SettingsIcon.png">
+    <ContentPage x:Name ="ProfileView" Title="My Character" IconImageSource="hat_icon_25.png">
         <ContentPage.Content>
             <Grid x:Name="ProfileGrid">
                 <Grid.RowDefinitions>

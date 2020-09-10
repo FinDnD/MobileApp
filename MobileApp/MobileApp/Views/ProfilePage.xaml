@@ -25,6 +25,7 @@
                            HorizontalOptions="Center" 
                            TextColor="Black" />
                 </StackLayout>
+                <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="{StaticResource AccentRed}" />
             </Grid>
         </ContentPage.Content>
     </ContentPage>
@@ -33,7 +34,7 @@
         <ContentPage.Content>
             <StackLayout Padding="50,20,50,100" VerticalOptions="Center">
                 <!--TODO: Update to a sample user image -->
-                <Image x:Name="Logo" Source="FindndLogo.png" HeightRequest="250"></Image>
+                <Image x:Name="UserImage" HeightRequest="250"></Image>
                 <Entry x:Name="Entry_Name" Text="UserName"></Entry>
                 <Entry x:Name="Entry_Email" Text="Email"></Entry>
 
@@ -41,7 +42,7 @@
                     <Label x:Name="Label_Theme" 
                            FontSize="Medium" 
                            TextColor="Black">Dark Mode</Label>
-                    
+                    <!--Dark Mode Toggle-->
                     <Switch IsToggled="True" Toggled="OnToggled">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">

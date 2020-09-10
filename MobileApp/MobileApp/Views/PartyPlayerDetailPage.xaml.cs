@@ -40,7 +40,7 @@ namespace MobileApp.Views
 
             Label labelClass = new Label
             {
-                Text = $"Class: {partyPlayer.Race}",
+                Text = $"Class: {partyPlayer.Class}",
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };

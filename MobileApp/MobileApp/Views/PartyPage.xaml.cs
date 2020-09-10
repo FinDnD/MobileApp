@@ -34,10 +34,11 @@ namespace MobileApp.Views
             }
             else
             {
-                LabelCampaign.Text = App.CurrentDM.ImageUrl;
+                LabelCampaign.Text = App.CurrentDM.CampaignName;
                 CampaignImage = App.CurrentDM.ImageUrl;
                 _PartyMembers = App.CurrentDM.Party.PlayersInParty;
             }
+            BindingContext = this;
         }
 
         public List<PartyPlayerDTO> PartyMembers

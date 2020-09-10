@@ -6,9 +6,9 @@
     <ContentPage.Content>
            
         <StackLayout HorizontalOptions="Center" Padding="30,0,30,0">
-            <Label x:Name="LabelCampaign" Padding="0,10,0,10" FontSize="Title" HorizontalOptions="Center" Text="{Binding CampaignName}"/>
-            <Frame BackgroundColor="Yellow" BorderColor="Black">
-                <Image  Source="{Binding CampaignImage}" Aspect="AspectFill"></Image>
+            <Label x:Name="LabelCampaign" Padding="0,10,0,10" FontSize="Title" HorizontalOptions="Center"/>
+            <Frame BackgroundColor="WhiteSmoke" BorderColor="Black">
+                <Image  Source="{Binding CampaignImage}" Aspect="AspectFill" HeightRequest="200"></Image>
             </Frame>
 
             <Label Padding="0,20,0,20" FontSize="Title" HorizontalOptions="Center"> Members </Label>
@@ -16,19 +16,17 @@
                           ItemsSource="{Binding PartyMembers}"
                           ItemTapped="PlayerMemberInfo"
                           >
-               <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <Grid>
-                       <Frame BackgroundColor="GhostWhite" BorderColor="Black">
-                            <Image  Source="{Binding Image}" HeightRequest="50"></Image>
-                        </Frame> 
-                        <Label  Grid.Column="1" Text="{Binding CharacterName}"/>
-                        
-                    </Grid>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate> 
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+
+                                    <Label Text="{Binding CharacterName}"/>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate> 
                 </ListView>
         </StackLayout>
          

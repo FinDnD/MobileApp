@@ -1,12 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileApp.Views.PartyPlayerDetailPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label x:Name="Name" Text="{Binding UserName}" />
-            <Label x:Name="Race" Text="{Binding Race}"/>
-            <Label x:Name="Class" Text="{Binding Class}"></Label>
-        </StackLayout>
-    </ContentPage.Content>
+             x:Class="MobileApp.Views.PartyPlayerDetailPage"
+             x:Name="ProfileView"
+             Title="Party Member">
+    <!--Pages can be added as references or in-line-->
+        <ContentPage.Content>
+            <StackLayout x:Name="ProfileStack">
+
+                <!--Logo and Headline-->
+                <StackLayout HorizontalOptions="Center" Margin="10,10,0,10" Padding="0,20,0,0">
+                    <Image Source="{Binding UserImage}" 
+                           HeightRequest="180"
+                           VerticalOptions="Center" />
+
+                    <Label Text="Character Profile" 
+                           Padding="0,10,0,0" 
+                           FontSize="Large" 
+                           HorizontalOptions="Center" 
+                           TextColor="Black" />
+                </StackLayout>
+            </StackLayout>
+        </ContentPage.Content>
 </ContentPage>

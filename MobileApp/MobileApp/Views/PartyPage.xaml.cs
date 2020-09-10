@@ -69,11 +69,23 @@ namespace MobileApp.Views
 
             if (e.Item != null)
             {
-                DisplayAlert("Member Selected", "Do you want to view member's details", "Yes", "No");
+                bool confirmation = await DisplayAlert("", "Do you want to view member's details", "Yes", "No");
+                if(confirmation)
+                {
                 PartyPlayerDTO P = (PartyPlayerDTO)e.Item;
                 await Navigation.PushAsync(new PartyPlayerDetailPage(P));
+                }
+                else
+                {
+
+                 ((ListView)sender).SelectedItem = null;
+                }
             }
-            ((ListView)sender).SelectedItem = null;
+            else
+            return;
+
         }
+
+    
     }
 }

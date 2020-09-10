@@ -24,6 +24,8 @@ namespace MobileApp.Views
         public LoginPage()
         {
             InitializeComponent();
+            Shell.SetTabBarIsVisible(this, false);
+            Shell.SetNavBarIsVisible(this, false);
         }
 
         /// <summary>
@@ -123,9 +125,11 @@ namespace MobileApp.Views
             return false;
         }
 
-        void UserSignUp(object sender, EventArgs e)
+        async void UserSignUp(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new RegisterPage();
+            //await Shell.Current.GoToAsync("//RegisterPage");
+            //await Shell.Current.GoToAsync("//RegisterPage");
+            await Shell.Current.GoToAsync($"RegisterPage");
         }
 
         public void Busy()

@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileApp.Views.PlayerCreationPage">
+             x:Class="MobileApp.Views.PlayerCreationPage"
+             NavigationPage.HasNavigationBar="false">
+
     <ContentPage.Content>
         <Grid>
 
@@ -54,8 +56,8 @@
                         SelectedItem="{Binding SelectedClass}">
                 </Picker>
                 <!--SelectedIndexChanged="OnPickerSelectedIndexChanged"-->
-                
-                <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="DodgerBlue" />
+
+                <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="{StaticResource AccentRed}" />
 
                 <!--Race Picker-->
                 <Picker Grid.Row="3" 
@@ -77,12 +79,13 @@
                 </Picker>
                 <!--SelectedIndexChanged="OnPickerSelectedIndexChanged"-->
 
+
                 <!--Good Alignment Slider-->
                 <Label Grid.Row="5" 
                        Margin="5,0,0,0" 
-                       Text="Good                                                                             Evil" 
+                       Text="Evil &lt;---------> Good" 
                        FontSize="Medium" 
-                       HorizontalOptions="Start"/>
+                       HorizontalOptions="Center"/>
                 <Slider Grid.Row="5" 
                         x:Name="GoodAlignment"
                         Value="7" 
@@ -96,9 +99,9 @@
                 <!--Lawful Alignment Slider-->
                 <Label Grid.Row="6" 
                        Margin="5,0,0,0" 
-                       Text="Lawful                                                                    Chaotic" 
+                       Text="Chaotic &lt;---------> Lawful" 
                        FontSize="Medium" 
-                       HorizontalOptions="Start"/>
+                       HorizontalOptions="Center"/>
                 <Slider Grid.Row="6" 
                         x:Name="LawfulAlignment"
                         Value="7" 

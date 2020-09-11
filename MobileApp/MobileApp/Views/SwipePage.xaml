@@ -4,7 +4,9 @@
              x:Class="MobileApp.Views.SwipePage"
              xmlns:swipeCardView="clr-namespace:MLToolkit.Forms.SwipeCardView;assembly=MLToolkit.Forms.SwipeCardView"
              xmlns:system="clr-namespace:System;assembly=netstandard"
-             Title="Home">
+             Title="Home"
+             BackgroundColor="{DynamicResource DynamicBackgroundColor}"
+             >
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Logout"
                      Order="Primary"

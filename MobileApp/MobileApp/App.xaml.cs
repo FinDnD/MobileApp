@@ -15,6 +15,7 @@ namespace MobileApp
         public static string UserToken;
         public static string UserId;
         public static string UserName;
+        public static bool IsLight;
 
         // Globals Immutables
         // API Root

@@ -44,6 +44,8 @@ namespace MobileApp.Views
             // If the Current User has a Player assigned to them, the Profiles will be built off of the DungeonMasters in their ActiveRequests list
             if (App.CurrentPlayer != null)
             {
+                if (App.CurrentPlayer.ActiveRequests[0].DungeonMaster.CampaignName == "Campaign Sample") App.CurrentPlayer.ActiveRequests.RemoveAt(0);
+
                 foreach (RequestDTO request in App.CurrentPlayer.ActiveRequests)
                 {
                     _Profiles.Add(new UserProfile
@@ -238,24 +240,5 @@ namespace MobileApp.Views
 
             }
         }
-
-        /// <summary>
-        /// Logs the user out and sets all App Info to null
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        async void Logout(object sender, EventArgs e)
-        {
-            App.CurrentDM = null;
-            App.CurrentPlayer = null;
-            App.UserToken = null;
-            App.UserName = null;
-            App.UserId = null;
-            await Xamarin.Essentials.SecureStorage.SetAsync("loggedIn", "0");
-            await Shell.Current.GoToAsync($"LoginPage");
-
-            //Application.Current.MainPage = new AppShell();
-        }
-
     }
 }

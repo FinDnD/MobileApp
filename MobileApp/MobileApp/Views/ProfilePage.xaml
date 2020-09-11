@@ -7,7 +7,7 @@
             BarTextColor="{StaticResource Primary}">
 
     <!--Pages can be added as references or in-line-->
-    <ContentPage x:Name ="ProfileView" Title="My Character" IconImageSource="SettingsIcon.png" BackgroundColor="{DynamicResource DynamicBackgroundColor}">
+    <ContentPage x:Name ="ProfileView" Title="My Character" IconImageSource="hat_icon_25.png" BackgroundColor="{DynamicResource DynamicBackgroundColor}">
         <ContentPage.Content  TextColor="{DynamicResource DynamicPrimaryTextColor}" >
             <Grid x:Name="ProfileGrid"  >
                 <Grid.RowDefinitions>
@@ -36,7 +36,7 @@
         <ContentPage.Content >
             <StackLayout Padding="50,20,50,100" VerticalOptions="Center">
                 <!--TODO: Update to a sample user image -->
-                <Image x:Name="Logo" Source="FindndLogo.png" HeightRequest="250"></Image>
+                <Image x:Name="UserImage" HeightRequest="250"></Image>
                 <Entry x:Name="Entry_Name" Text="UserName" TextColor="{DynamicResource DynamicPrimaryTextColor}"></Entry>
                 <Entry x:Name="Entry_Email" Text="Email" TextColor="{DynamicResource DynamicPrimaryTextColor}"></Entry>
 

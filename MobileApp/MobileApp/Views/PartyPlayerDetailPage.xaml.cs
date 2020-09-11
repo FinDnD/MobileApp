@@ -31,6 +31,14 @@ namespace MobileApp.Views
                 Padding = new Thickness(0, 30, 0, 0)
             };
 
+            Label labelUserEmail = new Label
+            {
+                Text = $"Email: {partyPlayer.UserEmail}",
+                TextColor = Color.Gray,
+                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                Margin = new Thickness(10, 10, 0, 10)
+            };
+            
             Label labelCharacterName = new Label
             {
                 Text = $"Character Name: {partyPlayer.CharacterName}",
@@ -64,6 +72,7 @@ namespace MobileApp.Views
             };
          
 
+            stackLayout.Children.Add(labelUserEmail);
             stackLayout.Children.Add(labelCharacterName);
             stackLayout.Children.Add(labelClass);
             stackLayout.Children.Add(labelRace);

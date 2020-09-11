@@ -95,7 +95,8 @@ namespace MobileApp.Views
                     ExperienceLevel = ((ExperienceLevel)SelectedExperience.SelectedItem).ToString(),
                     GoodAlignment = (int)GoodAlignment.Value,
                     LawAlignment = (int)LawfulAlignment.Value,
-                    ImageUrl = imageUploadResult
+                    ImageUrl = imageUploadResult,
+                    UserEmail = App.UserEmail
                 };
 
                 HttpClient client = new HttpClient();

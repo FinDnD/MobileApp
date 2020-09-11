@@ -61,22 +61,16 @@ namespace MobileApp.Views
 
                 App.UserToken = responseInfo.Jwt;
                 App.UserName = userNameEntry.Text;
-
+                App.UserEmail = userEmailEntry.Text;
                 NotBusy();
 
                 if (profileType)
                 {
                     await Shell.Current.GoToAsync($"DMCreationPage");
-                    //await Shell.Current.GoToAsync("//DMCreationPage");
-
-                    // Application.Current.MainPage = new DMCreationPage();
                 }
                 else
                 {
                     await Shell.Current.GoToAsync($"PlayerCreationPage");
-                    //await Shell.Current.GoToAsync("//PlayerCreationPage");
-
-                    // Application.Current.MainPage = new PlayerCreationPage();
                 }
             }
             else

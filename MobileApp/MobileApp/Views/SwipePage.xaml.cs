@@ -1,4 +1,5 @@
 ﻿using MLToolkit.Forms.SwipeCardView.Core;
+using MobileApp.Models;
 using MobileApp.Models.DTOs;
 using MobileApp.Models.ViewModels;
 using Newtonsoft.Json;
@@ -43,6 +44,8 @@ namespace MobileApp.Views
             // If the Current User has a Player assigned to them, the Profiles will be built off of the DungeonMasters in their ActiveRequests list
             if (App.CurrentPlayer != null)
             {
+                if (App.CurrentPlayer.ActiveRequests[0].DungeonMaster.CampaignName == "Campaign Sample") App.CurrentPlayer.ActiveRequests.RemoveAt(0);
+
                 foreach (RequestDTO request in App.CurrentPlayer.ActiveRequests)
                 {
                     _Profiles.Add(new UserProfile
@@ -128,6 +131,7 @@ namespace MobileApp.Views
 
             if (request.PlayerAccepted && request.DungeonMasterAccepted)
             {
+                await HandleUpdatingProfile();
                 if(App.CurrentPlayer != null)
                 {
                     await DisplayAlert("Matched!", "A whole new party awaits!", "X");
@@ -137,6 +141,31 @@ namespace MobileApp.Views
                     await DisplayAlert("Matched!", "A new player has joined your party!", "X");
                 }
             }
+        }
+
+        public async Task HandleUpdatingProfile()
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.UserToken);
+
+            if (App.CurrentPlayer != null)
+            {
+                HttpResponseMessage playerRequest = await client.GetAsync($"{App.ApiUrl}/Players/UserId/{App.UserId}");
+                if (playerRequest.IsSuccessStatusCode)
+                {
+                    string rawPlayer = await playerRequest.Content.ReadAsStringAsync();
+                    App.CurrentPlayer = JsonConvert.DeserializeObject<PlayerDTO>(rawPlayer);
+                }
+            }
+            else
+            {
+                HttpResponseMessage dmRequest = await client.GetAsync($"{App.ApiUrl}/DungeonMasters/UserId/{App.UserId}");
+                if (dmRequest.IsSuccessStatusCode)
+                {
+                    string rawDM = await dmRequest.Content.ReadAsStringAsync();
+                    App.CurrentDM = JsonConvert.DeserializeObject<DungeonMasterDTO>(rawDM);
+                }
+            };
         }
 
         private async Task HandleSwipeLeft(RequestDTO request)
@@ -211,24 +240,5 @@ namespace MobileApp.Views
 
             }
         }
-
-        /// <summary>
-        /// Logs the user out and sets all App Info to null
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        async void Logout(object sender, EventArgs e)
-        {
-            App.CurrentDM = null;
-            App.CurrentPlayer = null;
-            App.UserToken = null;
-            App.UserName = null;
-            App.UserId = null;
-            await Xamarin.Essentials.SecureStorage.SetAsync("loggedIn", "0");
-            await Shell.Current.GoToAsync($"LoginPage");
-
-            //Application.Current.MainPage = new AppShell();
-        }
-
     }
 }

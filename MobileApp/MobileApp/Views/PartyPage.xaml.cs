@@ -26,18 +26,21 @@ namespace MobileApp.Views
             InitializeComponent();
             MyPartyMembers();
 
-
             if (App.CurrentPlayer != null)
             {
                 LabelCampaign.Text = App.CurrentPlayer.Party.DungeonMasterDTO.CampaignName;
                 CampaignImage = App.CurrentPlayer.Party.DungeonMasterDTO.ImageUrl;
                 _PartyMembers = App.CurrentPlayer.Party.PlayersInParty;
+                LabelDMName.Text = App.CurrentPlayer.Party.DungeonMasterDTO.UserName;
+                LabelDMEmail.Text = App.CurrentPlayer.Party.DungeonMasterDTO.UserEmail;
             }
             else
             {
                 LabelCampaign.Text = App.CurrentDM.CampaignName;
                 CampaignImage = App.CurrentDM.ImageUrl;
                 _PartyMembers = App.CurrentDM.Party.PlayersInParty;
+                LabelDMName.Text = App.UserName;
+                LabelDMEmail.Text = App.UserEmail;
             }
             BindingContext = this;
            

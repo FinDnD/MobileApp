@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿?xml version="1.0" encoding="utf-8" ?><ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileApp.Views.SwipePage"
              xmlns:swipeCardView="clr-namespace:MLToolkit.Forms.SwipeCardView;assembly=MLToolkit.Forms.SwipeCardView"
@@ -7,12 +6,6 @@
              Title="Home"
              BackgroundColor="{DynamicResource DynamicBackgroundColor}"
              >
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Logout"
-                     Order="Primary"
-                     Priority="0"
-                     Clicked="Logout"/>
-    </ContentPage.ToolbarItems>
 
     <RefreshView>
         <StackLayout>
@@ -35,21 +28,40 @@
                                 <AbsoluteLayout>
                                     <Image Source="{Binding Image}" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" AbsoluteLayout.LayoutFlags="All"></Image>
 
-                                    <Label FontSize="Large" FontAttributes="Bold" TextColor="Red" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0.05, 0.8, 150, 30" AbsoluteLayout.LayoutFlags="PositionProportional" >
-                                        <Label.FormattedText>
-                                            <FormattedString >
-                                                <Span Text="{Binding UserName}"></Span>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>   
-                                    <Label FontSize="Large" FontAttributes="Bold" TextColor="Red" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0.05, 0.9, 150, 30" AbsoluteLayout.LayoutFlags="PositionProportional" >
-                                        <Label.FormattedText>
-                                            <FormattedString >
-                                                <Span Text="Experience: "></Span>
-                                                <Span Text="{Binding ExperienceLevel}"></Span>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
+                                    <Frame  BackgroundColor="WhiteSmoke" 
+                                            Opacity="0.7" 
+                                            AbsoluteLayout.LayoutBounds="0.1, 0.8, 370, 30" 
+                                            AbsoluteLayout.LayoutFlags="PositionProportional"
+                                            CornerRadius="10"
+                                            HorizontalOptions="Center"
+                                            Padding="10, 0, 10, 0"
+                                            HasShadow="False">
+                                        <Label FontSize="Large" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="{StaticResource AccentRed}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
+                                            <Label.FormattedText>
+                                                <FormattedString >
+                                                    <Span Text="{Binding UserName}"></Span>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </Frame>
+                                    <Frame  BackgroundColor="WhiteSmoke" 
+                                            Opacity="0.7" 
+                                            AbsoluteLayout.LayoutBounds="0.05, 0.9, 370, 30" 
+                                            AbsoluteLayout.LayoutFlags="PositionProportional"
+                                            CornerRadius="10"
+                                            HorizontalOptions="Center"
+                                            Padding="10, 0, 10, 0"
+                                            HasShadow="True">
+                                        <Label FontSize="Large" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="{StaticResource AccentRed}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
+                                            <Label.FormattedText>
+                                                <FormattedString >
+                                                    <Span Text="Experience: "></Span>
+                                                    <Span Text="{Binding ExperienceLevel}"></Span>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </Frame>
+
                                 </AbsoluteLayout>
                             </Frame>
                         </StackLayout>

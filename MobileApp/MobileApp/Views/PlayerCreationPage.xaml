@@ -82,14 +82,13 @@
 
                 <!--Good Alignment Slider-->
                 <Label Grid.Row="5" 
-                       Margin="5,0,0,0" 
                        Text="Evil &lt;---------> Good" 
                        FontSize="Medium" 
                        HorizontalOptions="Center"/>
                 <Slider Grid.Row="5" 
                         x:Name="GoodAlignment"
                         Value="7" 
-                        Maximum="10" 
+                        Maximum="100" 
                         Minimum="0" 
                         MaximumTrackColor="DarkGray"
                         MinimumTrackColor="Black"
@@ -98,14 +97,13 @@
 
                 <!--Lawful Alignment Slider-->
                 <Label Grid.Row="6" 
-                       Margin="5,0,0,0" 
                        Text="Chaotic &lt;---------> Lawful" 
                        FontSize="Medium" 
                        HorizontalOptions="Center"/>
-                <Slider Grid.Row="6" 
+                <Slider Grid.Row="6"
                         x:Name="LawfulAlignment"
                         Value="7" 
-                        Maximum="10" 
+                        Maximum="100" 
                         Minimum="0" 
                         MaximumTrackColor="DarkGray"
                         MinimumTrackColor="Black"

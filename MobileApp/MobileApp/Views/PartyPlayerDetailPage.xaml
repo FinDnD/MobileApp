@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileApp.Views.PartyPlayerDetailPage"
              x:Name="ProfileView"
-             Title="Party Member">
+             Title="Party Member"
+              BackgroundColor="{DynamicResource DynamicBackgroundColor}">
     <!--Pages can be added as references or in-line-->
         <ContentPage.Content>
             <StackLayout x:Name="ProfileStack">
@@ -18,7 +19,7 @@
                            Padding="0,10,0,0" 
                            FontSize="Large" 
                            HorizontalOptions="Center" 
-                           TextColor="Black" />
+                           TextColor="{DynamicResource DynamicPrimaryTextColor}"/>
                 </StackLayout>
             </StackLayout>
         </ContentPage.Content>

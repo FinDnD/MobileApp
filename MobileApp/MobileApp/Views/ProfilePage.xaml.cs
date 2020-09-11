@@ -5,8 +5,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace MobileApp.Views
@@ -14,6 +15,8 @@ namespace MobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage : TabbedPage
     {
+        private string DynamicPrimaryTextColor;
+
         public string UserName { get; set; }
         public string UserEmail { get; set; }
 
@@ -49,23 +52,29 @@ namespace MobileApp.Views
                     new RowDefinition {Height = 10}
                 }
             };
+       
+         
 
             StackLayout stackLayout = new StackLayout
             {
                 Margin = new Thickness(20, 0, 20, 0),
                 Padding = new Thickness(0, 70, 0, 0)
+                
             };
 
             Label labelCampaign = new Label
             {
                 Text = $"Campaign Name: {App.CurrentDM.CampaignName}",
+                TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
-
+            
+     
             Label labelExperience = new Label
             {
                 Text = $"Experience Level: {App.CurrentDM.ExperienceLevel}",
+                TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
@@ -153,10 +162,11 @@ namespace MobileApp.Views
             Label labelCharacterName = new Label
             {
                 Text = $"Character Name: {App.CurrentPlayer.CharacterName}",
+                TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
-
+          
             Label labelClass = new Label
             {
                 Text = $"Class: {App.CurrentPlayer.Class}",
@@ -167,6 +177,7 @@ namespace MobileApp.Views
             Label labelRace = new Label
             {
                 Text = $"Race: {App.CurrentPlayer.Race}",
+                TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
@@ -180,14 +191,16 @@ namespace MobileApp.Views
 
             Label labelGoodAlignment = new Label
             {
-                Text = $"Good Alignment: {App.CurrentPlayer.GoodAlignment}%",
+                Text = $"Good Alignment: {App.CurrentPlayer.GoodAlignment}",
+                TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
 
             Label labelLawfulAlignment = new Label
             {
-                Text = $"Lawful Alignment: {App.CurrentPlayer.LawAlignment}%",
+                Text = $"Lawful Alignment Level: {App.CurrentPlayer.LawAlignment}",
+                TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
@@ -218,7 +231,7 @@ namespace MobileApp.Views
             stackLayout.Children.Add(button);
 
             Grid.SetRow(stackLayout, 1);
-
+           
             ProfileGrid.Children.Add(stackLayout);
         }
 
@@ -302,6 +315,20 @@ namespace MobileApp.Views
             uploadIndicator.IsRunning = true;
             button.IsEnabled = false;
         }
+        void OnToggled(object sender, ToggledEventArgs e)
+        {
+            bool isToogled = e.Value;
+            if (isToogled)
+            {
+                ThemeHelper.SetDarkMode();
+                App.IsLight = false;
+            }
+            else
+            {
+            ThemeHelper.SetLightMode();
+                App.IsLight = true;
+            }
+        }
 
         public void NotBusy(Button button)
         {
@@ -311,10 +338,7 @@ namespace MobileApp.Views
         }
 
 
-        public void OnToggled(object sender, EventArgs e)
-        {
-
-        }
+    
 
 
         /// <summary>

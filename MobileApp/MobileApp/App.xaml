@@ -11,14 +11,21 @@
  
     <Application.Resources>
         <ResourceDictionary>
+            <Color x:Key="DarkSurface">#121212</Color>
+            <Color x:Key="LightSurface">#00FF0266</Color>
+            
             <Color x:Key="Primary">#333333</Color>
+            <Color x:Key="PrimaryTextColor">#000000</Color>
             <Color x:Key="PrimaryLight">#e3e3e3</Color>
             <Color x:Key="AccentRed">#9D0A0E</Color>
             <Style TargetType="TabbedPage">
                 <Setter Property="BarBackgroundColor" Value="Black"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource DynamicBackgroundColor}" />
             </Style>
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="Black"/>
+                
+                <Setter Property="BarBackgroundColor" Value="{DynamicResource DynamicNavigationBarColor}" />
+                <Setter Property="BarTextColor" Value="{DynamicResource DynamicBarTextColor}" />
             </Style>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>

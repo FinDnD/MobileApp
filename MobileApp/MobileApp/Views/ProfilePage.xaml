@@ -7,9 +7,9 @@
             BarTextColor="{StaticResource Primary}">
 
     <!--Pages can be added as references or in-line-->
-    <ContentPage x:Name ="ProfileView" Title="My Character" IconImageSource="hat_icon_25.png">
-        <ContentPage.Content>
-            <Grid x:Name="ProfileGrid">
+    <ContentPage x:Name ="ProfileView" Title="My Character" IconImageSource="hat_icon_25.png" BackgroundColor="{DynamicResource DynamicBackgroundColor}">
+        <ContentPage.Content  TextColor="{DynamicResource DynamicPrimaryTextColor}" >
+            <Grid x:Name="ProfileGrid"  >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10*"/>
                     <RowDefinition Height="80*"/>
@@ -24,28 +24,28 @@
                     <Label Text="Character Profile" 
                            Padding="0,10,0,0" 
                            FontSize="Large" 
-                           HorizontalOptions="Center" 
-                           TextColor="Black" />
+                           HorizontalOptions="Center"  
+                           TextColor="{DynamicResource DynamicPrimaryTextColor}" />
                 </StackLayout>
                 <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="{StaticResource AccentRed}" />
             </Grid>
         </ContentPage.Content>
     </ContentPage>
 
-    <ContentPage Title="Edit Bio" IconImageSource="BioIcon.png">
-        <ContentPage.Content>
+    <ContentPage Title="Edit Bio" IconImageSource="BioIcon.png"  BackgroundColor="{DynamicResource DynamicBackgroundColor}">
+        <ContentPage.Content >
             <StackLayout Padding="50,20,50,100" VerticalOptions="Center">
                 <!--TODO: Update to a sample user image -->
                 <Image x:Name="UserImage" HeightRequest="250"></Image>
-                <Entry x:Name="Entry_Name" Text="{Binding UserName}"></Entry>
-                <Entry x:Name="Entry_Email" Text="{Binding UserEmail}"></Entry>
+                <Entry x:Name="Entry_Name" Text="{Binding UserName}" TextColor="{DynamicResource DynamicPrimaryTextColor}"></Entry>
+                <Entry x:Name="Entry_Email" Text="{Binding UserEmail}" TextColor="{DynamicResource DynamicPrimaryTextColor}"></Entry>
 
                 <StackLayout VerticalOptions="Center" Margin="3,0,3,0">
                     <Label x:Name="Label_Theme" 
                            FontSize="Medium" 
-                           TextColor="Black">Dark Mode</Label>
-                    <!--Dark Mode Toggle-->
-                    <Switch IsToggled="True" Toggled="OnToggled">
+                           TextColor="{DynamicResource DynamicPrimaryTextColor}">Dark Mode</Label>
+                    
+                    <Switch IsToggled="False" Toggled="OnToggled">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="On">

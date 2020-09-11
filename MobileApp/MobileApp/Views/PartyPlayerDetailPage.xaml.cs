@@ -34,6 +34,7 @@ namespace MobileApp.Views
             Label labelUserEmail = new Label
             {
                 Text = $"Email: {partyPlayer.UserEmail}",
+                TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };

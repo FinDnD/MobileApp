@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApp.Views.PlayerCreationPage"
+             NavigationPage.HasNavigationBar="false">
+
+    <ContentPage.Content>
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+
+            <!--Logo and Headline-->
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="10,10,0,10" Padding="0,20,0,0">
+                <Image Source="dice_icon50.png" VerticalOptions="Center" />
+
+                <Label Text="Create Your Character" Padding="0,10,0,0" FontSize="Large" HorizontalOptions="Center" TextColor="Black" />
+            </StackLayout>
+
+            <Grid VerticalOptions="Center" Grid.Row="1" Margin="20,0,20,0" Padding="0,10,0,0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!--Character Name - Text Entry-->
+                <Entry Grid.Row="1" 
+                       x:Name="characterNameEntry" 
+                       Text="{Binding CharacterName}" 
+                       Placeholder="Character Name" 
+                       ReturnType="Next" 
+                       Keyboard="Text" 
+                       FontSize="Medium">
+                </Entry>
+
+                <!--Class Picker-->
+                <Picker Grid.Row="2" 
+                        Title="Select Class" 
+                        x:Name = "SelectedClass"
+                        ItemsSource="{Binding ClassList}" 
+                        ItemDisplayBinding="{Binding .}"
+                        SelectedItem="{Binding SelectedClass}">
+                </Picker>
+                <!--SelectedIndexChanged="OnPickerSelectedIndexChanged"-->
+
+                <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="{StaticResource AccentRed}" />
+
+                <!--Race Picker-->
+                <Picker Grid.Row="3" 
+                        Title="Select Race" 
+                        x:Name = "SelectedRace" 
+                        ItemsSource="{Binding RaceList}" 
+                        ItemDisplayBinding="{Binding .}"
+                        SelectedItem="{Binding SelectedRace}">
+                </Picker>
+                <!--SelectedIndexChanged="OnPickerSelectedIndexChanged"-->
+
+                <!--Experience Level Picker-->
+                <Picker Grid.Row="4" 
+                        Title="Select Experience Level"
+                        x:Name = "SelectedExperience"
+                        ItemsSource="{Binding ExperienceList}" 
+                        ItemDisplayBinding="{Binding .}"
+                        SelectedItem="{Binding SelectedExperience}">
+                </Picker>
+                <!--SelectedIndexChanged="OnPickerSelectedIndexChanged"-->
+
+
+                <!--Good Alignment Slider-->
+                <Label Grid.Row="5" 
+                       Text="Evil &lt;---------> Good" 
+                       FontSize="Medium" 
+                       HorizontalOptions="Center"/>
+                <Slider Grid.Row="5" 
+                        x:Name="GoodAlignment"
+                        Value="7" 
+                        Maximum="100" 
+                        Minimum="0" 
+                        MaximumTrackColor="DarkGray"
+                        MinimumTrackColor="Black"
+                        ThumbColor="#9D0A0E">
+                </Slider>
+
+                <!--Lawful Alignment Slider-->
+                <Label Grid.Row="6" 
+                       Text="Chaotic &lt;---------> Lawful" 
+                       FontSize="Medium" 
+                       HorizontalOptions="Center"/>
+                <Slider Grid.Row="6"
+                        x:Name="LawfulAlignment"
+                        Value="7" 
+                        Maximum="100" 
+                        Minimum="0" 
+                        MaximumTrackColor="DarkGray"
+                        MinimumTrackColor="Black"
+                        ThumbColor="#9D0A0E">
+                </Slider>
+
+                <!--Image Upload Button-->
+                <!--TODO: Clicked="Button_Clicked" -->
+
+                <Button Grid.Row="7" 
+                        x:Name="ButtonSelectPic" 
+                        Grid.Column="0" 
+                        Text="UPLOAD IMAGE"
+                        BackgroundColor="#e3e3e3" 
+                        Clicked="btnSelectPic_Clicked"
+                        TextColor="#9D0A0E"/>
+
+
+                <!--Save Button-->
+                <Button Grid.Row="8" 
+                        Text="CREATE CHARACTER" 
+                        x:Name="SubmitButton"
+                        BackgroundColor="#9D0A0E" 
+                        TextColor="White" 
+                        HeightRequest="50" 
+                        Clicked="OnSubmit"
+                        VerticalOptions="Start" />
+
+            </Grid>
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

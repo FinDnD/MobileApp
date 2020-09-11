@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApp.Views.PartyPage"
+              Title="My Party"
+              BackgroundColor="{DynamicResource DynamicBackgroundColor}">
+    <ContentPage.Content>
+           
+        <StackLayout HorizontalOptions="Center" Padding="30,0,30,0">
+            <Label x:Name="LabelCampaign" Padding="0,10,0,10" FontSize="Title" HorizontalOptions="Center" TextColor="{DynamicResource DynamicPrimaryTextColor}"/>
+            <Frame BackgroundColor="WhiteSmoke" BorderColor="Black">
+                <Image  Source="{Binding CampaignImage}" Aspect="AspectFill" HeightRequest="200"></Image>
+            </Frame>
+            <Label x:Name="LabelDMName" TextColor="{DynamicResource DynamicPrimaryTextColor}" Padding="0,10,0,10" FontSize="Large" HorizontalOptions="Center"/>
+            <Label x:Name="LabelDMEmail" TextColor="{DynamicResource DynamicPrimaryTextColor}" Padding="0,10,0,10" FontSize="Medium" HorizontalOptions="Center"/>
+
+            <Label Padding="0,20,0,20" FontSize="Title" HorizontalOptions="Center" TextColor="{DynamicResource DynamicPrimaryTextColor}"> Members </Label>
+                <ListView x:Name="MyParty" 
+                          ItemsSource="{Binding PartyMembers}"
+                          ItemTapped="PlayerMemberInfo"
+                          >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell >
+                            <Grid>
+
+                                <Label Text="{Binding CharacterName}" FontSize="Medium" TextColor="{DynamicResource DynamicPrimaryTextColor}"/>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate> 
+                </ListView>
+        </StackLayout>
+         
+
+    </ContentPage.Content>
+</ContentPage>

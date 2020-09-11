@@ -133,7 +133,8 @@ namespace MobileApp.Views
                     ExperienceLevel = ((ExperienceLevel)
                     SelectedExperience.SelectedItem).ToString(),
                     PersonalBio = PersonalBio.Text,
-                    ImageUrl = imageUploadResult
+                    ImageUrl = imageUploadResult,
+                    UserEmail = App.UserEmail
                 };
                 HttpClient client = new HttpClient();
 

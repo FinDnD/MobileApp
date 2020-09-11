@@ -61,7 +61,7 @@ namespace MobileApp.Views
 
                 App.UserToken = responseInfo.Jwt;
                 App.UserName = userNameEntry.Text;
-
+                App.UserEmail = userEmailEntry.Text;
                 NotBusy();
 
                 if (profileType)

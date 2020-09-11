@@ -17,6 +17,11 @@ Viewing and deciding on party members or dungeon masters is done with swipe card
 
 ---
 
+## Page Flow
+![Page flow image](assets/401FinalLogicFlowChart.png)
+
+---
+
 ## Frameworks & Tools 
 - Microsoft Visual Studio 2019
 - Frameworks:

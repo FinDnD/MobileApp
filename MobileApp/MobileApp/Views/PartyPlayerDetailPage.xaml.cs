@@ -31,6 +31,13 @@ namespace MobileApp.Views
                 Padding = new Thickness(0, 30, 0, 0)
             };
 
+            Label labelUserName = new Label
+            {
+                Text = $"User's Email: {partyPlayer.UserEmail}",
+                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                Margin = new Thickness(10, 10, 0, 10)
+            };
+            
             Label labelCharacterName = new Label
             {
                 Text = $"Character Name: {partyPlayer.CharacterName}",

@@ -1,4 +1,5 @@
 ﻿using MLToolkit.Forms.SwipeCardView.Core;
+using MobileApp.Models;
 using MobileApp.Models.DTOs;
 using MobileApp.Models.ViewModels;
 using Newtonsoft.Json;
@@ -128,6 +129,7 @@ namespace MobileApp.Views
 
             if (request.PlayerAccepted && request.DungeonMasterAccepted)
             {
+                await HandleUpdatingProfile();
                 if(App.CurrentPlayer != null)
                 {
                     await DisplayAlert("Matched!", "A whole new party awaits!", "X");
@@ -137,6 +139,31 @@ namespace MobileApp.Views
                     await DisplayAlert("Matched!", "A new player has joined your party!", "X");
                 }
             }
+        }
+
+        public async Task HandleUpdatingProfile()
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.UserToken);
+
+            if (App.CurrentPlayer != null)
+            {
+                HttpResponseMessage playerRequest = await client.GetAsync($"{App.ApiUrl}/Players/UserId/{App.UserId}");
+                if (playerRequest.IsSuccessStatusCode)
+                {
+                    string rawPlayer = await playerRequest.Content.ReadAsStringAsync();
+                    App.CurrentPlayer = JsonConvert.DeserializeObject<PlayerDTO>(rawPlayer);
+                }
+            }
+            else
+            {
+                HttpResponseMessage dmRequest = await client.GetAsync($"{App.ApiUrl}/DungeonMasters/UserId/{App.UserId}");
+                if (dmRequest.IsSuccessStatusCode)
+                {
+                    string rawDM = await dmRequest.Content.ReadAsStringAsync();
+                    App.CurrentDM = JsonConvert.DeserializeObject<DungeonMasterDTO>(rawDM);
+                }
+            };
         }
 
         private async Task HandleSwipeLeft(RequestDTO request)

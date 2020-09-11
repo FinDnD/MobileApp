@@ -14,9 +14,14 @@ namespace MobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage : TabbedPage
     {
+        public string UserName { get; set; }
+        public string UserEmail { get; set; }
+
         public ProfilePage()
         {
             InitializeComponent();
+            UserName = App.UserName;
+            UserEmail  = App.UserEmail;
 
             if (App.CurrentPlayer != null)
             {
@@ -28,7 +33,7 @@ namespace MobileApp.Views
                 CreateDMContent();
                 UserImage.Source = App.CurrentDM.ImageUrl;
             }
-
+            BindingContext = this;
         }
 
         public void CreateDMContent()
@@ -311,5 +316,23 @@ namespace MobileApp.Views
 
         }
 
+
+        /// <summary>
+        /// Logs the user out and sets all App Info to null
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        async void Logout(object sender, EventArgs e)
+        {
+            App.CurrentDM = null;
+            App.CurrentPlayer = null;
+            App.UserToken = null;
+            App.UserName = null;
+            App.UserId = null;
+            await Xamarin.Essentials.SecureStorage.SetAsync("loggedIn", "0");
+            await Shell.Current.GoToAsync($"LoginPage");
+
+            //Application.Current.MainPage = new AppShell();
+        }
     }
 }

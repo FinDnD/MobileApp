@@ -1,5 +1,5 @@
-# ![](assets/dice_icon50.png) FinDnD ![](assets/dice_icon50.png)
-### ![](assets/dragon_icon_25.png)  What is this? ![](assets/dragon_icon_25.png) 
+# ![](assets/dice_icon30.png) FinDnD ![](assets/dice_icon30.png)
+### ![](assets/dragon_icon_25.png)  What is this?
 
 FinDnD is a mobile application currently in development that will allow users to easily find groups of people that they can play Dungeons and Dragons with. One of the most common sentiments surrounding the game is "it sounds like so much fun but I just don't know anyone to play with", this app seeks to alleviate that. The app allows users to create either a Dungeon Master or a Player profile, where they will give information either about their proposed campaign and themselves as a DM or information about the character they are interested in playing as, respectively. 
 
@@ -13,18 +13,18 @@ Viewing and deciding on party members or dungeon masters is done with swipe card
 
 ---
 
-## ![](assets/hat_icon_25.png) Domain Model ![](assets/hat_icon_25.png) 
+## ![](assets/hat_icon_25.png) Domain Model
 
 ![Domain model image](assets/domain-model.png)
 
 ---
 
-## ![](assets/dragon_icon_25.png) Page Flow ![](assets/dragon_icon_25.png)
+## ![](assets/dragon_icon_25.png) Page Flow
 ![Page flow image](assets/401FinalLogicFlowChart.png)
 
 ---
 
-## ![](assets/hat_icon_25.png) Frameworks & Tools ![](assets/hat_icon_25.png) 
+## ![](assets/hat_icon_25.png) Frameworks & Tools
 - Microsoft Visual Studio 2019
 - Frameworks:
   - .NET Core
@@ -38,14 +38,14 @@ Viewing and deciding on party members or dungeon masters is done with swipe card
 
 ---
 
-## ![](assets/dragon_icon_25.png) Changelog ![](assets/dragon_icon_25.png)
+## ![](assets/dragon_icon_25.png) Changelog
 - V 1.0
   - MVP Hit - 9/10/20
 - V 0.1
   - Project Start - 9/4/20
 
 ---
-## ![](assets/hat_icon_25.png) Getting Started ![](assets/hat_icon_25.png)
+## ![](assets/hat_icon_25.png) Getting Started
 An Android or IPhone emulator with a configured device is required to run this application.
 
 Clone this repository to your local machine.
@@ -69,14 +69,14 @@ Select ```Debug``` -> ```{Chosen Device Name}``` to the run the app with the deb
 
 ---
 
-## ![](assets/dragon_icon_25.png) Authors ![](assets/dragon_icon_25.png)
+## ![](assets/dragon_icon_25.png) Authors
 - [Na'ama Bar-Ilan](https://github.com/NaamaBarIlan) 
 - [Yasir Mohamud](https://github.com/Yasir-Mohamud)
 - [Nicco Ryan](https://github.com/Niccoryan0)
 
 ---
 
-## ![](assets/hat_icon_25.png) Acknowledgements ![](assets/hat_icon_25.png)
+## ![](assets/hat_icon_25.png) Acknowledgements
 Special thanks to:
 - Amanda Iverson
 - Andrew Casper
@@ -84,7 +84,7 @@ Special thanks to:
 
 ---
 
-## ![](assets/dragon_icon_25.png) References ![](assets/dragon_icon_25.png)
+## ![](assets/dragon_icon_25.png) References
 - [Dogs IRL: Xamarin App used for reference](https://github.com/DogsIRLOrg) 
 - [C-Sharp Corner: Uploading images in Xamarin](https://www.c-sharpcorner.com/article/xamarin-forms-upload-image-to-blob-storage/)
 

@@ -34,13 +34,15 @@ namespace MobileApp.Views
             Label labelCharacterName = new Label
             {
                 Text = $"Character Name: {partyPlayer.CharacterName}",
+                TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
 
             Label labelClass = new Label
             {
-                Text = $"Class: {partyPlayer.Class}",
+                Text = $"Class: {partyPlayer.Race}",
+                TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
@@ -48,6 +50,7 @@ namespace MobileApp.Views
             Label labelRace = new Label
             {
                 Text = $"Race: {partyPlayer.Race}",
+                TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
@@ -55,17 +58,19 @@ namespace MobileApp.Views
             Label labelExperience = new Label
             {
                 Text = $"Experience Level: {partyPlayer.ExperienceLevel}",
+                TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
-
+         
 
             stackLayout.Children.Add(labelCharacterName);
             stackLayout.Children.Add(labelClass);
             stackLayout.Children.Add(labelRace);
             stackLayout.Children.Add(labelExperience);
-
             ProfileStack.Children.Add(stackLayout);
         }
+
+      
     }
 }

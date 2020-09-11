@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,7 +16,7 @@ namespace MobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PartyPage : ContentPage
     {
-
+       
         public List<PartyPlayerDTO> _PartyMembers;
         public string Campaign { get; set; }
         public string CampaignImage { get; set; }
@@ -39,6 +40,7 @@ namespace MobileApp.Views
                 _PartyMembers = App.CurrentDM.Party.PlayersInParty;
             }
             BindingContext = this;
+           
         }
 
         public List<PartyPlayerDTO> PartyMembers
@@ -68,6 +70,7 @@ namespace MobileApp.Views
             if (e.Item != null)
             {
                 bool confirmation = await DisplayAlert("", "Do you want to view member's details", "Yes", "No");
+                
                 if (confirmation)
                 {
                     PartyPlayerDTO selectedPlayer = (PartyPlayerDTO)e.Item;

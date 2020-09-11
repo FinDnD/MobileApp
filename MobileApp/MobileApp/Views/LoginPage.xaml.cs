@@ -107,6 +107,7 @@ namespace MobileApp.Views
                 App.CurrentPlayer = JsonConvert.DeserializeObject<PlayerDTO>(rawPlayer);
                 App.CurrentDM = null;
                 App.UserId = App.CurrentPlayer.UserId;
+                App.UserEmail = App.CurrentPlayer.UserEmail;
                 App.UserName = Entry_Name.Text;
                 return true;
             }
@@ -119,6 +120,8 @@ namespace MobileApp.Views
                     App.CurrentDM = JsonConvert.DeserializeObject<DungeonMasterDTO>(rawDM);
                     App.CurrentPlayer = null;
                     App.UserId = App.CurrentDM.UserId;
+                    App.UserEmail = App.CurrentDM.UserEmail;
+                    App.UserName = Entry_Name.Text;
                     return true;
                 }
             };

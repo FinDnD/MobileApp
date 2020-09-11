@@ -170,6 +170,7 @@ namespace MobileApp.Views
             Label labelClass = new Label
             {
                 Text = $"Class: {App.CurrentPlayer.Class}",
+                TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
@@ -185,6 +186,7 @@ namespace MobileApp.Views
             Label labelExperience = new Label
             {
                 Text = $"Experience Level: {App.CurrentPlayer.ExperienceLevel}",
+                TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
@@ -325,7 +327,7 @@ namespace MobileApp.Views
             }
             else
             {
-            ThemeHelper.SetLightMode();
+                ThemeHelper.SetLightMode();
                 App.IsLight = true;
             }
         }
@@ -336,10 +338,6 @@ namespace MobileApp.Views
             uploadIndicator.IsRunning = false;
             button.IsEnabled = false;
         }
-
-
-    
-
 
         /// <summary>
         /// Logs the user out and sets all App Info to null
@@ -353,10 +351,9 @@ namespace MobileApp.Views
             App.UserToken = null;
             App.UserName = null;
             App.UserId = null;
+            App.UserEmail = null;
             await Xamarin.Essentials.SecureStorage.SetAsync("loggedIn", "0");
             await Shell.Current.GoToAsync($"LoginPage");
-
-            //Application.Current.MainPage = new AppShell();
         }
     }
 }

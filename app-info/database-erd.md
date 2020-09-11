@@ -1,6 +1,6 @@
 # FinDnD ERD & Table Explanations
 
-![Database ERD](assets/ERD.png)
+![Database ERD](../assets/ERD.png)
 
 ---
 

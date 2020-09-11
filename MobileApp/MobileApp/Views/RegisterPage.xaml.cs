@@ -21,6 +21,8 @@ namespace MobileApp.Views
         public RegisterPage()
         {
             InitializeComponent();
+            Shell.SetTabBarIsVisible(this, false);
+            Shell.SetNavBarIsVisible(this, false);
         }
 
         async void SubmitRegistration(object sender, EventArgs e)
@@ -64,11 +66,17 @@ namespace MobileApp.Views
 
                 if (profileType)
                 {
-                    Application.Current.MainPage = new DMCreationPage();
+                    await Shell.Current.GoToAsync($"DMCreationPage");
+                    //await Shell.Current.GoToAsync("//DMCreationPage");
+
+                    // Application.Current.MainPage = new DMCreationPage();
                 }
                 else
                 {
-                    Application.Current.MainPage = new PlayerCreationPage();
+                    await Shell.Current.GoToAsync($"PlayerCreationPage");
+                    //await Shell.Current.GoToAsync("//PlayerCreationPage");
+
+                    // Application.Current.MainPage = new PlayerCreationPage();
                 }
             }
             else
@@ -79,9 +87,9 @@ namespace MobileApp.Views
         }
 
 
-        void ReturnToLogin(object sender, EventArgs e)
+        async void ReturnToLogin(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new LoginPage();
+            await Navigation.PopAsync();
         }
 
         public void Busy()

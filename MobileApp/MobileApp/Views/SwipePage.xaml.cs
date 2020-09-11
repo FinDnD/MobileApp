@@ -217,14 +217,17 @@ namespace MobileApp.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Logout(object sender, EventArgs e)
+        async void Logout(object sender, EventArgs e)
         {
             App.CurrentDM = null;
             App.CurrentPlayer = null;
             App.UserToken = null;
             App.UserName = null;
             App.UserId = null;
-            Application.Current.MainPage = new LoginPage();
+            await Xamarin.Essentials.SecureStorage.SetAsync("loggedIn", "0");
+            await Shell.Current.GoToAsync($"LoginPage");
+
+            //Application.Current.MainPage = new AppShell();
         }
 
     }

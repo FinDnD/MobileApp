@@ -35,6 +35,8 @@ namespace MobileApp.Views
         public PlayerCreationPage()
         {
             InitializeComponent();
+            Shell.SetTabBarIsVisible(this, false);
+            Shell.SetNavBarIsVisible(this, false);
             _ClassList = new ObservableCollection<Class>(Enum.GetValues(typeof(Class)).OfType<Class>().ToList());
             _RaceList = new ObservableCollection<Race>(Enum.GetValues(typeof(Race)).OfType<Race>().ToList());
             _ExperienceList = new ObservableCollection<ExperienceLevel>(Enum.GetValues(typeof(ExperienceLevel)).OfType<ExperienceLevel>().ToList());
@@ -117,6 +119,7 @@ namespace MobileApp.Views
                     App.CurrentPlayer = player;
                     App.CurrentDM = null;
                     Application.Current.MainPage = new AppShell();
+                    //await Shell.Current.GoToAsync("//NavTabBar/SwipeTab/SwipePage");
                 }
                 else
                 {

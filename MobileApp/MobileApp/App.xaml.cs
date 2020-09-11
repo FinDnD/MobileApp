@@ -26,7 +26,12 @@ namespace MobileApp
         {
             InitializeComponent();
 
-            MainPage = new LoginPage();
+            var loggedIn = Xamarin.Essentials.SecureStorage.GetAsync("isLogged").Result;
+            MainPage = new AppShell();
+            if (App.UserName == null || App.UserId == null)
+            {
+                Shell.Current.GoToAsync($"LoginPage").Wait();
+            }
         }
 
         protected override void OnStart()

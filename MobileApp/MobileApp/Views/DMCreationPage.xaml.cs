@@ -26,7 +26,6 @@ namespace MobileApp.Views
     public partial class DMCreationPage : ContentPage
     {
         private string DMApiUrl = $"{App.ApiUrl}/DungeonMasters";
-        private string ImageApiUrl = $"{App.ApiUrl}/UserImages";
 
         private MediaFile _imageUpload;
 
@@ -38,6 +37,8 @@ namespace MobileApp.Views
         public DMCreationPage()
         {
             InitializeComponent();
+            Shell.SetTabBarIsVisible(this, false);
+            Shell.SetNavBarIsVisible(this, false);
             _ExperienceList = new ObservableCollection<ExperienceLevel>(Enum.GetValues(typeof(ExperienceLevel)).OfType<ExperienceLevel>().ToList());
             BindingContext = this;
         }
@@ -155,7 +156,9 @@ namespace MobileApp.Views
                     var dm = JsonConvert.DeserializeObject<DungeonMasterDTO>(dmString);
                     App.CurrentDM = dm;
                     App.CurrentPlayer = null;
-                    App.Current.MainPage = new AppShell();
+                    //await Shell.Current.GoToAsync("//NavTabBar/SwipeTab/SwipePage");
+
+                    Application.Current.MainPage = new AppShell();
                 }
                 else
                 {

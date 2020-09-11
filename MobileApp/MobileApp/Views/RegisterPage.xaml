@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileApp.Views.RegisterPage">
-    
+             x:Class="MobileApp.Views.RegisterPage"            
+             NavigationPage.HasNavigationBar="false">
+
     <ContentPage.Content>
         <Grid>
 
@@ -42,7 +43,7 @@
                 <Entry Grid.Row="3" x:Name="userEmailEntry" Placeholder="Email" ReturnType="Next" Keyboard="Email" FontSize="Medium"></Entry>
                 <Entry Grid.Row="4" x:Name="userPassword" Placeholder="Password" ReturnType="Next" IsPassword="True" Keyboard="Text" FontSize="Medium"></Entry>
                 <Entry Grid.Row="5" x:Name="userPasswordConfirmed" Placeholder="Confirm Password" ReturnType="Next" IsPassword="True" Keyboard="Text" FontSize="Medium"></Entry>
-                <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="DodgerBlue" />
+                <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="{StaticResource AccentRed}" />
 
                 <Button Grid.Row="6" x:Name="RegisterButton" Text="REGISTER" BackgroundColor="#3897f0" TextColor="White" HeightRequest="50" VerticalOptions="Start" Clicked="SubmitRegistration" />
                 <Button Grid.Row="7" x:Name="BackToLoginButton" Text="Have an account? Sign In" BackgroundColor="#e3e3e3" TextColor="Black" Clicked="ReturnToLogin" />

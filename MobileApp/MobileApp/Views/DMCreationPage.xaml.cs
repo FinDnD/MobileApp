@@ -33,7 +33,9 @@ namespace MobileApp.Views
 
 
 
-
+        /// <summary>
+        /// Constructor function for DM Creation. Hides tab bars
+        /// </summary>
         public DMCreationPage()
         {
             InitializeComponent();
@@ -56,10 +58,11 @@ namespace MobileApp.Views
         }
 
         /// <summary>
+        /// Event handler for the Upload Image button, handles getting permissions and prompting user to select a photo from their storage.
         /// Much of this page was inspired by : https://www.c-sharpcorner.com/article/xamarin-forms-upload-image-to-blob-storage/
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Generic Sender object for Event handler</param>
+        /// <param name="e">Generic Event args for Event handler</param>
         async void btnSelectPic_Clicked(object sender, EventArgs e)
         {
             PermissionStatus status = await Permissions.RequestAsync<Permissions.Photos>();
@@ -78,13 +81,14 @@ namespace MobileApp.Views
                 };
                 _imageUpload = await CrossMedia.Current.PickPhotoAsync();
                 if (_imageUpload == null) return;
-
-                // TODO: Show the User their image before submitting?
-                // imageView.Source = ImageSource.FromStream(() => _imageUpload.GetStream());
             }
         }
 
-        public async Task<string> SendImageToAPI(string username)
+        /// <summary>
+        /// Handles sending the image to the API when the DM is being created.
+        /// </summary>
+        /// <returns>Task of completion with new image URL or empty string if upload failed</returns>
+        public async Task<string> SendImageToAPI()
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.UserToken);
@@ -96,7 +100,7 @@ namespace MobileApp.Views
             content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
             {
                 Name = "file",
-                FileName = $"{username}(TempImage)"
+                FileName = $"{App.UserName}(TempImage)"
             };
 
             content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
@@ -112,7 +116,12 @@ namespace MobileApp.Views
                 return "";
             }
         }
-
+        
+        /// <summary>
+        /// Event handler for the CREATE CHARACTER button. Sends the provided DM information to the Web Service to be stored in the SQL database.
+        /// </summary>
+        /// <param name="sender">Generic Sender object for event</param>
+        /// <param name="e">Generic Event args object for event</param>
         private async void OnSubmit(object sender, EventArgs e)
         {
             if (_imageUpload == null)
@@ -122,7 +131,7 @@ namespace MobileApp.Views
             };
             Busy();
 
-            var imageUploadResult = await SendImageToAPI(App.UserName);
+            var imageUploadResult = await SendImageToAPI();
 
             if (imageUploadResult != "")
             {
@@ -173,7 +182,9 @@ namespace MobileApp.Views
             }
         }
 
-
+        /// <summary>
+        /// Shows activity indicator and disabled buttons
+        /// </summary>
         public void Busy()
         {
             uploadIndicator.IsVisible = true;
@@ -182,6 +193,9 @@ namespace MobileApp.Views
             SubmitButton.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Hides activity indicator and enables buttons
+        /// </summary>
         public void NotBusy()
         {
             uploadIndicator.IsVisible = false;

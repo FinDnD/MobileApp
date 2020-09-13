@@ -21,6 +21,9 @@ namespace MobileApp.Views
     {
         public string APIRoute = $"{App.ApiUrl}/Account/Login";
 
+        /// <summary>
+        /// Constructor argument for the Login Page, sets Nav and Tab bars to be invisible
+        /// </summary>
         public LoginPage()
         {
             InitializeComponent();
@@ -31,8 +34,8 @@ namespace MobileApp.Views
         /// <summary>
         /// Event handler for Login button clicked
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Generic Sender object for Event handler</param>
+        /// <param name="e">Generic Event args for Event handler</param>
         public async void UserLogIn(object sender, EventArgs e)
         {
             Busy();
@@ -40,7 +43,7 @@ namespace MobileApp.Views
         }
 
         /// <summary>
-        /// Send login information to the API
+        /// Send login information to the API and check response, if successful send user to Homepage
         /// </summary>
         /// <param name="loginInfo">Login information</param>
         /// <returns>Task of completion with HttpResponseMessage from Login</returns>
@@ -128,13 +131,19 @@ namespace MobileApp.Views
             return false;
         }
 
+        /// <summary>
+        /// Send the user to the RegisterPage
+        /// </summary>
+        /// <param name="sender">Generic Sender object for Event handler</param>
+        /// <param name="e">Generic Event args for Event handler</param>
         async void UserSignUp(object sender, EventArgs e)
         {
-            //await Shell.Current.GoToAsync("//RegisterPage");
-            //await Shell.Current.GoToAsync("//RegisterPage");
             await Shell.Current.GoToAsync($"RegisterPage");
         }
 
+        /// <summary>
+        /// Shows activity indicator and disabled buttons
+        /// </summary>
         public void Busy()
         {
             uploadIndicator.IsVisible = true;
@@ -143,6 +152,9 @@ namespace MobileApp.Views
             Button_CreateAccount.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Hides activity indicator and enables buttons
+        /// </summary>
         public void NotBusy()
         {
             uploadIndicator.IsVisible = false;

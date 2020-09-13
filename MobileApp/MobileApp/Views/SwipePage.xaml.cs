@@ -106,9 +106,6 @@ namespace MobileApp.Views
                 case SwipeCardDirection.Left:
                     await HandleSwipeLeft(request);
                     break;
-                case SwipeCardDirection.Up:
-                    await HandleSwipeUp(request);
-                    break;
             }
         }
 

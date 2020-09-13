@@ -350,7 +350,7 @@ namespace MobileApp.Views
         {
             uploadIndicator.IsVisible = false;
             uploadIndicator.IsRunning = false;
-            button.IsEnabled = false;
+            button.IsEnabled = true;
         }
 
         /// <summary>

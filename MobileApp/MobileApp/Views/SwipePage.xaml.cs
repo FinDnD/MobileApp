@@ -91,7 +91,7 @@ namespace MobileApp.Views
         /// <summary>
         /// Handle the Swiping Event when it occurs
         /// </summary>
-        /// <param name="e">Event details for the Swipe </param>
+        /// <param name="e">Event details for the Swipe including current item and direction</param>
         public async void OnSwiped(SwipedCardEventArgs e)
         {
             var request = _Requests[0];
@@ -106,16 +106,13 @@ namespace MobileApp.Views
                 case SwipeCardDirection.Left:
                     await HandleSwipeLeft(request);
                     break;
-                case SwipeCardDirection.Up:
-                    await HandleSwipeUp(request);
-                    break;
             }
         }
 
         /// <summary>
-        /// Handle logic for right swipes or "accepted"
+        /// Handle logic for right swipes or "accepted", sends a request to the Web Service with the new request after setting the Accepted value for the current user to True
         /// </summary>
-        /// <param name="request">Request that the swipe occured on</param>
+        /// <param name="request">Request that the swipe occurred on</param>
         private async Task HandleSwipeRight(RequestDTO request)
         {
             if (App.CurrentPlayer != null)
@@ -143,6 +140,10 @@ namespace MobileApp.Views
             }
         }
 
+        /// <summary>
+        /// Update a user's profile by sending a new request for their information to the Web Service, used to check for any updated requests or party changes after the user's initial login/registration
+        /// </summary>
+        /// <returns>Task of completion</returns>
         public async Task HandleUpdatingProfile()
         {
             HttpClient client = new HttpClient();
@@ -168,12 +169,22 @@ namespace MobileApp.Views
             };
         }
 
+        /// <summary>
+        /// Handle swiping left or rejecting the current profile, sets the Active value to false and sends a request to update the request in the database
+        /// </summary>
+        /// <param name="request">Request that the swipe occurred on</param>
+        /// <returns>Task of completion</returns>
         private async Task HandleSwipeLeft(RequestDTO request)
         {
             request.Active = false;
             await PutRequest(request);
         }
 
+        /// <summary>
+        /// Send the supplied request to the Web Service
+        /// </summary>
+        /// <param name="request">Updated request to be sent</param>
+        /// <returns>Task of completion with response message from Web Service</returns>
         private async Task<HttpResponseMessage> PutRequest(RequestDTO request)
         {
             HttpClient client = new HttpClient();
@@ -190,28 +201,21 @@ namespace MobileApp.Views
             return response;
         }
 
-
-        private async Task HandleSwipeUp(RequestDTO request)
-        {
-            if (App.CurrentPlayer != null)
-            {
-                DungeonMasterDTO dm = request.DungeonMaster;
-                await DisplayAlert("Dungeon Master Info", $"Campaign Name:\n{dm.CampaignName}\n\nDescription:\n{dm.CampaignDesc}\n\nAbout Me:\n{dm.PersonalBio}", "Back to Swiping");
-            }
-            else
-            {
-                PlayerDTO player = request.Player;
-                await DisplayAlert("Player Info", $"Name: {player.CharacterName}\nClass: {player.Class}\nRace: {player.Race}\nGood: {player.GoodAlignment}%\nLawful: {player.LawAlignment}%", "Back to Swiping");
-            }
-        }
-
-
+        /// <summary>
+        /// Invoke a left swipe when Dislike button is clicked
+        /// </summary>
+        /// <param name="sender">Generic Sender object for Event handler</param>
+        /// <param name="e">Generic Event args for Event handler</param>
         private void OnDislikeClicked(object sender, EventArgs e)
         {
             SwipeCard.InvokeSwipe(SwipeCardDirection.Left);
         }
 
-
+        /// <summary>
+        /// Invoke a right swipe when Like button is clicked
+        /// </summary>
+        /// <param name="sender">Generic Sender object for Event handler</param>
+        /// <param name="e">Generic Event args for Event handler</param>
         private void OnLikeClicked(object sender, EventArgs e)
         {
             SwipeCard.InvokeSwipe(SwipeCardDirection.Right);
@@ -220,8 +224,8 @@ namespace MobileApp.Views
         /// <summary>
         /// When a user clicks the info button this method displays the current Profiles information
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Generic Sender object for Event handler</param>
+        /// <param name="e">Generic Event args for Event handler</param>
         private async void OnInfoClicked(object sender, EventArgs e)
         {
             if (_Requests.Any())

@@ -43,6 +43,9 @@ namespace MobileApp.Views
             BindingContext = this;
         }
 
+        /// <summary>
+        /// Used for Binding Classes to Front End
+        /// </summary>
         public ObservableCollection<Class> ClassList
         {
             get => _ClassList;
@@ -52,6 +55,9 @@ namespace MobileApp.Views
             }
         }
 
+        /// <summary>
+        /// Used for Binding Races to Front End
+        /// </summary>
         public ObservableCollection<Race> RaceList
         {
             get => _RaceList;
@@ -61,6 +67,9 @@ namespace MobileApp.Views
             }
         }
 
+        /// <summary>
+        /// Used for Binding Experience Levels to Front End
+        /// </summary>
         public ObservableCollection<ExperienceLevel> ExperienceList
         {
             get => _ExperienceList;
@@ -70,8 +79,11 @@ namespace MobileApp.Views
             }
         }
 
-
-
+        /// <summary>
+        /// Event handler for the CREATE CHARACTER button. Sends the provided Player information to the Web Service to be stored in the SQL database.
+        /// </summary>
+        /// <param name="sender">Generic Sender object for event</param>
+        /// <param name="e">Generic Event args object for event</param>
         private async void OnSubmit(object sender, EventArgs e)
         {
             Busy();
@@ -137,10 +149,11 @@ namespace MobileApp.Views
 
 
         /// <summary>
+        /// Event handler for the Upload Image button, handles getting permissions and prompting user to select a photo from their storage.
         /// Much of this page was inspired by : https://www.c-sharpcorner.com/article/xamarin-forms-upload-image-to-blob-storage/
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Generic Sender object for Event handler</param>
+        /// <param name="e">Generic Event args for Event handler</param>
         async void btnSelectPic_Clicked(object sender, EventArgs e)
         {
             PermissionStatus status = await Permissions.RequestAsync<Permissions.Photos>();
@@ -165,6 +178,10 @@ namespace MobileApp.Views
             }
         }
 
+        /// <summary>
+        /// Handles sending the image to the API when the Player is being created.
+        /// </summary>
+        /// <returns>Task of completion with new image URL or empty string if upload failed</returns>
         public async Task<string> SendImageToAPI(string username)
         {
             HttpClient client = new HttpClient();
@@ -194,6 +211,9 @@ namespace MobileApp.Views
             }
         }
 
+        /// <summary>
+        /// Shows activity indicator and disables buttons
+        /// </summary>
         public void Busy()
         {
             uploadIndicator.IsVisible = true;
@@ -202,6 +222,9 @@ namespace MobileApp.Views
             SubmitButton.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Hides activity indicator and enables buttons
+        /// </summary>
         public void NotBusy()
         {
             uploadIndicator.IsVisible = false;

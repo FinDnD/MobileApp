@@ -20,6 +20,9 @@ namespace MobileApp.Views
         public string UserName { get; set; }
         public string UserEmail { get; set; }
 
+        /// <summary>
+        /// ProfilePage constructor, binds information about the user and creates and displays content based on what kind of profile the user has
+        /// </summary>
         public ProfilePage()
         {
             InitializeComponent();
@@ -39,6 +42,9 @@ namespace MobileApp.Views
             BindingContext = this;
         }
 
+        /// <summary>
+        /// Create the content a DM sees when visiting the page and add elements as children to the stacklayout, then add the stacklayout to the page's grid.
+        /// </summary>
         public void CreateDMContent()
         {
             ContentPage page = new ContentPage();
@@ -125,6 +131,8 @@ namespace MobileApp.Views
                 Margin = new Thickness(0, 10, 0, 0)
             };
 
+            button.Clicked += async (sender, args) => await OnDeleteClicked(button);
+
             stackLayout.Children.Add(labelCampaign);
             stackLayout.Children.Add(labelExperience);
             stackLayout.Children.Add(labelCampaignDescription);
@@ -138,7 +146,9 @@ namespace MobileApp.Views
             ProfileGrid.Children.Add(stackLayout);
         }
 
-
+        /// <summary>
+        /// Create the content a player sees when visiting the page and add elements as children to the stacklayout, then add the stacklayout to the page's grid.
+        /// </summary>
         public void CreatePlayerContent()
         {
             ContentPage page = new ContentPage();
@@ -220,10 +230,6 @@ namespace MobileApp.Views
 
             button.Clicked += async (sender, args) => await OnDeleteClicked(button);
 
-
-
-
-
             stackLayout.Children.Add(labelCharacterName);
             stackLayout.Children.Add(labelClass);
             stackLayout.Children.Add(labelRace);
@@ -237,6 +243,11 @@ namespace MobileApp.Views
             ProfileGrid.Children.Add(stackLayout);
         }
 
+        /// <summary>
+        /// Event handler for clicking the delete button, sends a delete request to the web service for the current profile
+        /// </summary>
+        /// <param name="button">Button to bind click event to</param>
+        /// <returns>Task of completion</returns>
         async Task OnDeleteClicked(Button button)
         {
             Busy(button);
@@ -297,6 +308,12 @@ namespace MobileApp.Views
             }
         }
 
+
+        /// <summary>
+        /// Handles deleting a Player profile
+        /// </summary>
+        /// <param name="client">HttpClient for API request</param>
+        /// <returns>Task of completion with boolean representing if the delete was successful</returns>
         public async Task<bool> DeletePlayer(HttpClient client)
         {
             HttpResponseMessage result = await client.DeleteAsync($"{App.ApiUrl}/Players");
@@ -304,6 +321,11 @@ namespace MobileApp.Views
             return result.IsSuccessStatusCode;
         }
 
+        /// <summary>
+        /// Handles deleting a DM profile
+        /// </summary>
+        /// <param name="client">HttpClient for API request</param>
+        /// <returns>Task of completion with boolean representing if the delete was successful</returns>
         public async Task<bool> DeleteDM(HttpClient client)
         {
             HttpResponseMessage result = await client.DeleteAsync($"{App.ApiUrl}/DungeonMasters");
@@ -311,12 +333,31 @@ namespace MobileApp.Views
             return result.IsSuccessStatusCode;
         }
 
+        /// <summary>
+        /// Shows activity indicator and disables buttons
+        /// </summary>
         public void Busy(Button button)
         {
             uploadIndicator.IsVisible = true;
             uploadIndicator.IsRunning = true;
             button.IsEnabled = false;
         }
+
+        /// <summary>
+        /// Hides activity indicator and enables buttons
+        /// </summary>
+        public void NotBusy(Button button)
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+            button.IsEnabled = true;
+        }
+
+        /// <summary>
+        /// Toggle Darkmode event handler
+        /// </summary>
+        /// <param name="sender">Generic Sender object for Event handler</param>
+        /// <param name="e">Generic Event args for Event handler</param>
         void OnToggled(object sender, ToggledEventArgs e)
         {
             bool isToogled = e.Value;
@@ -332,18 +373,13 @@ namespace MobileApp.Views
             }
         }
 
-        public void NotBusy(Button button)
-        {
-            uploadIndicator.IsVisible = false;
-            uploadIndicator.IsRunning = false;
-            button.IsEnabled = false;
-        }
+
 
         /// <summary>
         /// Logs the user out and sets all App Info to null
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Generic Sender object for Event handler</param>
+        /// <param name="e">Generic Event args for Event handler</param>
         async void Logout(object sender, EventArgs e)
         {
             App.CurrentDM = null;

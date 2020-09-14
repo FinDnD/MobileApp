@@ -23,6 +23,10 @@ namespace MobileApp.Views
             BindingContext = this;
         }
 
+        /// <summary>
+        /// Create all elements on the page and add them as children
+        /// </summary>
+        /// <param name="partyPlayer">Selected Party Player to display</param>
         public void FillPage(PartyPlayerDTO partyPlayer)
         {
             StackLayout stackLayout = new StackLayout

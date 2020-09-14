@@ -27,7 +27,6 @@ namespace MobileApp
         {
             InitializeComponent();
 
-            var loggedIn = Xamarin.Essentials.SecureStorage.GetAsync("isLogged").Result;
             MainPage = new AppShell();
             if (App.UserName == null || App.UserId == null)
             {

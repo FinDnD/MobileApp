@@ -21,6 +21,9 @@ namespace MobileApp.Views
         public string Campaign { get; set; }
         public string CampaignImage { get; set; }
 
+        /// <summary>
+        /// Constructor for Party Page, displays info based on what user is logged in (different profile types have different places where the necessary information is stored)
+        /// </summary>
         public PartyPage()
         {
             InitializeComponent();
@@ -46,6 +49,9 @@ namespace MobileApp.Views
            
         }
 
+        /// <summary>
+        /// Bind party members
+        /// </summary>
         public List<PartyPlayerDTO> PartyMembers
         {
             get => _PartyMembers;
@@ -55,6 +61,9 @@ namespace MobileApp.Views
             }
         }
 
+        /// <summary>
+        /// Get current party for the user
+        /// </summary>
         void MyPartyMembers()
         {
             if (App.CurrentPlayer != null)
@@ -67,6 +76,11 @@ namespace MobileApp.Views
             }
         }
 
+        /// <summary>
+        /// Send a user to a specific player's party details, activated when a user clicks a player in the party list.
+        /// </summary>
+        /// <param name="sender">Generic Sender object for Event handler</param>
+        /// <param name="e">Generic Event args for Event handler</param>
         async void PlayerMemberInfo(object sender, ItemTappedEventArgs e)
         {
 

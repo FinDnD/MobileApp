@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApp.Views.DMCreationPage"           
+             NavigationPage.HasNavigationBar="false">  
+
+    <ContentPage.Content>
+        <StackLayout>
+            
+        <!--Logo and Headline-->
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="10,10,0,10" Padding="0,30,0,0">
+                <Image Source="dice_icon50.png" VerticalOptions="Center" />
+
+                <Label Text="Create Your Dungeon Master" Padding="0,10,0,0" FontSize="Large" HorizontalOptions="Center" TextColor="Black" />
+            </StackLayout>
+                
+                <StackLayout Margin="20">
+                    <!--Campaign Name - Text Entry-->
+                    <Entry Grid.Row="1" 
+                           x:Name="campaignNameEntry" 
+                           Text="{Binding CampaignName}" 
+                           Placeholder="Campaign Name" 
+                           ReturnType="Next" 
+                           Keyboard="Text" 
+
+                           FontSize="Medium">
+                    </Entry>
+
+                    <!--Experience Level Picker-->
+                <Picker Grid.Row="2" 
+                            Title="Select Experience Level"
+                            x:Name = "SelectedExperience"
+                            ItemsSource="{Binding ExperienceList}" 
+                            ItemDisplayBinding="{Binding .}"
+                            SelectedItem="{Binding SelectedExperience}"
+                            >
+                </Picker>
+
+                <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="DodgerBlue" />
+
+                <!--Campaign Description-->
+                    <Label Margin="10,0,10,0"
+                               Text="Campaign Description" 
+                               TextColor="Gray"
+                               FontSize="Medium" 
+                               HorizontalOptions="Start"
+                               />
+                    <Editor x:Name="CampaignDescription" 
+                                TextColor="Gray"
+                                HeightRequest="60"
+                                FontSize="Medium" 
+                                Placeholder="Tell us all about this campaign. Where will you go? What will you do? Who/What's the big bad? "/>
+
+                    <!--Personal Bio-->
+                    <Label Margin="3, 0, 3, 0"
+                               Text="Personal Bio" 
+                               TextColor="Gray"
+                               FontSize="Medium" 
+                               HorizontalOptions="Start"/>
+                    <Editor x:Name="PersonalBio" 
+                                TextColor="Gray"
+                                HeightRequest="60"
+                                FontSize="Medium" 
+                                Placeholder="Tell the other players a little bit about this yourself! "/>
+
+
+                    <!--Image Upload Button-->
+                    <!--TODO: Clicked="Button_Clicked" -->
+                    <Button Grid.Row="5" 
+                            x:Name="ButtonSelectPic" 
+                            Grid.Column="0" 
+                            Text="UPLOAD IMAGE"
+                            Clicked="btnSelectPic_Clicked"
+                            BackgroundColor="#e3e3e3" 
+                            TextColor="#9D0A0E"
+                            />
+
+
+                    <!--Save Button-->
+                    <Button Grid.Row="6" 
+                            x:Name="SubmitButton"
+                            Text="CREATE DUNGEON MASTER" 
+                            BackgroundColor="#9D0A0E" 
+                            TextColor="White" 
+                            Clicked="OnSubmit"
+                            HeightRequest="50" 
+                            VerticalOptions="Start"
+                            />
+                </StackLayout>
+        </StackLayout>
+
+
+    </ContentPage.Content>
+</ContentPage>

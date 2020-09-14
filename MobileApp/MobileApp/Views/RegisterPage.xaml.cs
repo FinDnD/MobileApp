@@ -25,6 +25,11 @@ namespace MobileApp.Views
             Shell.SetNavBarIsVisible(this, false);
         }
 
+        /// <summary>
+        /// Event handler for submitting a registration, sends provided info to the Web Service and checks response, forwards user to Profile creation if successful.
+        /// </summary>
+        /// <param name="sender">Generic Sender object for Event handler</param>
+        /// <param name="e">Generic Event args for Event handler</param>
         async void SubmitRegistration(object sender, EventArgs e)
         {
             Busy();
@@ -80,12 +85,19 @@ namespace MobileApp.Views
             }
         }
 
-
+        /// <summary>
+        /// Event handler for the Return To Login button, sends user back to login page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         async void ReturnToLogin(object sender, EventArgs e)
         {
-            await Navigation.PopAsync();
+            await Shell.Current.GoToAsync($"LoginPage");
         }
 
+        /// <summary>
+        /// Shows activity indicator and disabled buttons
+        /// </summary>
         public void Busy()
         {
             uploadIndicator.IsVisible = true;
@@ -94,6 +106,9 @@ namespace MobileApp.Views
             BackToLoginButton.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Hides activity indicator and enables buttons
+        /// </summary>
         public void NotBusy()
         {
             uploadIndicator.IsVisible = false;

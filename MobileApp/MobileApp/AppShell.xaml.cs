@@ -15,6 +15,9 @@ namespace MobileApp
             CurrentItem.CurrentItem = SwipeTab;
         }
 
+        /// <summary>
+        /// Register non-Tab routes for the app
+        /// </summary>
         private void RegisterRoutes()
         {
             Routing.RegisterRoute("LoginPage", typeof(LoginPage));

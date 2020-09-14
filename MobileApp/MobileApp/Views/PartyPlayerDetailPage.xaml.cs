@@ -23,6 +23,10 @@ namespace MobileApp.Views
             BindingContext = this;
         }
 
+        /// <summary>
+        /// Create all elements on the page and add them as children
+        /// </summary>
+        /// <param name="partyPlayer">Selected Party Player to display</param>
         public void FillPage(PartyPlayerDTO partyPlayer)
         {
             StackLayout stackLayout = new StackLayout
@@ -34,6 +38,7 @@ namespace MobileApp.Views
             Label labelUserEmail = new Label
             {
                 Text = $"Email: {partyPlayer.UserEmail}",
+                TextColor = Color.Gray,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };

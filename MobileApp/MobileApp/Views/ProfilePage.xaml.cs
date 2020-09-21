@@ -250,61 +250,58 @@ namespace MobileApp.Views
         /// <returns>Task of completion</returns>
         async Task OnDeleteClicked(Button button)
         {
-            Busy(button);
-            HttpClient client = new HttpClient();
+            var confirmation = await DisplayAlert("", "Are you sure you want to delete your character? There is no way to get them back.", "Just Do It!", "Nope, nevermind.");
+            if (confirmation)
+            {
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.UserToken);
-            bool result = false;
-            if (App.CurrentPlayer != null)
-            {
-                result = await DeletePlayer(client);
-            }
-            else
-            {
-                result = await DeleteDM(client);
-            }
+                Busy(button);
+                HttpClient client = new HttpClient();
 
-            NotBusy(button);
-            if (result)
-            {
-                App.CurrentPlayer = null;
-                App.CurrentDM = null;
-                // True for New Profile
-                // False for logout
-                var choice = await DisplayAlert("Success", "Profile successfully deleted. Would you like to Logout or Create a new Profile?", "New Profile", "Logout");
-                if (choice)
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.UserToken);
+                bool result = false;
+                if (App.CurrentPlayer != null)
                 {
-                    // True for DM
-                    // False for Player
-                    bool profileType = await DisplayAlert("", "Would you like to sign up with a Dungeon Master or a Player profile?", "Dungeon Master", "Player");
-                    if (profileType)
+                    result = await DeletePlayer(client);
+                }
+                else
+                {
+                    result = await DeleteDM(client);
+                }
+
+                NotBusy(button);
+                if (result)
+                {
+                    App.CurrentPlayer = null;
+                    App.CurrentDM = null;
+                    // True for New Profile
+                    // False for logout
+                    var choice = await DisplayAlert("Success", "Profile successfully deleted. Would you like to Logout or Create a new Profile?", "New Profile", "Logout");
+                    if (choice)
                     {
-                        Application.Current.MainPage = new NavigationPage(new DMCreationPage());
-
-
-                        // Application.Current.MainPage = new DMCreationPage();
+                        // True for DM
+                        // False for Player
+                        bool profileType = await DisplayAlert("", "Would you like to sign up with a Dungeon Master or a Player profile?", "Dungeon Master", "Player");
+                        if (profileType)
+                        {
+                            await Shell.Current.GoToAsync($"DMCreationPage");
+                        }
+                        else
+                        {
+                            await Shell.Current.GoToAsync($"PlayerCreationPage");
+                        }
                     }
                     else
                     {
-                        Application.Current.MainPage = new NavigationPage(new PlayerCreationPage());
-
-                        //await Shell.Current.GoToAsync("//PlayerCreationPage");
-
-
-                        // Application.Current.MainPage = new PlayerCreationPage();
+                        App.UserToken = null;
+                        App.UserName = null;
+                        App.UserId = null;
+                        Application.Current.MainPage = new NavigationPage(new LoginPage());
                     }
                 }
                 else
                 {
-                    App.UserToken = null;
-                    App.UserName = null;
-                    App.UserId = null;
-                    Application.Current.MainPage = new NavigationPage(new LoginPage());
+                    await DisplayAlert("Oh No!", "Something went wrong deleting your Profile. Please try again.", "OK");
                 }
-            }
-            else
-            {
-                await DisplayAlert("Oh No!", "Something went wrong deleting your Profile. Please try again.", "OK");
             }
         }
 
@@ -316,7 +313,7 @@ namespace MobileApp.Views
         /// <returns>Task of completion with boolean representing if the delete was successful</returns>
         public async Task<bool> DeletePlayer(HttpClient client)
         {
-            HttpResponseMessage result = await client.DeleteAsync($"{App.ApiUrl}/Players");
+            HttpResponseMessage result = await client.DeleteAsync($"{App.ApiUrl}/Players/{App.CurrentPlayer.Id}");
 
             return result.IsSuccessStatusCode;
         }
@@ -328,7 +325,7 @@ namespace MobileApp.Views
         /// <returns>Task of completion with boolean representing if the delete was successful</returns>
         public async Task<bool> DeleteDM(HttpClient client)
         {
-            HttpResponseMessage result = await client.DeleteAsync($"{App.ApiUrl}/DungeonMasters");
+            HttpResponseMessage result = await client.DeleteAsync($"{App.ApiUrl}/DungeonMasters/{App.CurrentDM.Id}");
 
             return result.IsSuccessStatusCode;
         }

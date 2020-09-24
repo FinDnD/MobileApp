@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using MobileApp.Views;
+﻿using MobileApp.Views;
 using Xamarin.Forms;
 
 namespace MobileApp

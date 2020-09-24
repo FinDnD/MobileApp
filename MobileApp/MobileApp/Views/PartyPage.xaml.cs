@@ -1,12 +1,5 @@
 ﻿using MobileApp.Models.DTOs;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,7 +9,7 @@ namespace MobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PartyPage : ContentPage
     {
-       
+
         public List<PartyPlayerDTO> _PartyMembers;
         public string Campaign { get; set; }
         public string CampaignImage { get; set; }
@@ -46,7 +39,7 @@ namespace MobileApp.Views
                 LabelDMEmail.Text = App.UserEmail;
             }
             BindingContext = this;
-           
+
         }
 
         /// <summary>
@@ -55,7 +48,7 @@ namespace MobileApp.Views
         public List<PartyPlayerDTO> PartyMembers
         {
             get => _PartyMembers;
-            set 
+            set
             {
                 _PartyMembers = value;
             }
@@ -87,7 +80,7 @@ namespace MobileApp.Views
             if (e.Item != null)
             {
                 bool confirmation = await DisplayAlert("", "Do you want to view member's details", "Yes", "No");
-                
+
                 if (confirmation)
                 {
                     PartyPlayerDTO selectedPlayer = (PartyPlayerDTO)e.Item;

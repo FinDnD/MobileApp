@@ -1,20 +1,15 @@
-﻿using Microsoft.WindowsAzure.Storage;
-using MobileApp.Models;
-using MobileApp.Models.DTOs;
+﻿using MobileApp.Models.DTOs;
 using Newtonsoft.Json;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml.XPath;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -116,7 +111,7 @@ namespace MobileApp.Views
                 return "";
             }
         }
-        
+
         /// <summary>
         /// Event handler for the CREATE CHARACTER button. Sends the provided DM information to the Web Service to be stored in the SQL database.
         /// </summary>

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace MobileApp.Views
@@ -11,7 +9,7 @@ namespace MobileApp.Views
         public const string DynamicPrimaryTextColor = nameof(DynamicPrimaryTextColor);
         public const string DynamicSecondaryTextColor = nameof(DynamicSecondaryTextColor);
         public const string DynamicBackgroundColor = nameof(DynamicBackgroundColor);
-       
+
 
         public static void SetDynamicResource(string targetResourceName, string sourceResourceName)
         {

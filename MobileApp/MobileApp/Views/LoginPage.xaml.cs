@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using MobileApp.Models;
+using MobileApp.Models.DTOs;
+using MobileApp.Models.ViewModels;
+using Newtonsoft.Json;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
-using MobileApp.Models;
-using MobileApp.Models.DTOs;
-using MobileApp.Models.ViewModels;
-using MobileApp.Views.Navigation;
-using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

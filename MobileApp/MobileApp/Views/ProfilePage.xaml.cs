@@ -330,6 +330,7 @@ namespace MobileApp.Views
             return result.IsSuccessStatusCode;
         }
 
+
         /// <summary>
         /// Shows activity indicator and disables buttons
         /// </summary>

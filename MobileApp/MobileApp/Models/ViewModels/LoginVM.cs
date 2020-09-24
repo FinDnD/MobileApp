@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Windows.Input;
 
 namespace MobileApp.Models.ViewModels
 {
@@ -12,6 +11,6 @@ namespace MobileApp.Models.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-       
+
     }
 }

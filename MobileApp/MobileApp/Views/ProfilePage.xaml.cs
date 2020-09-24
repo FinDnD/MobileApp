@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace MobileApp.Views
@@ -15,7 +10,6 @@ namespace MobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage : TabbedPage
     {
-        private string DynamicPrimaryTextColor;
 
         public string UserName { get; set; }
         public string UserEmail { get; set; }
@@ -27,7 +21,7 @@ namespace MobileApp.Views
         {
             InitializeComponent();
             UserName = App.UserName;
-            UserEmail  = App.UserEmail;
+            UserEmail = App.UserEmail;
 
             if (App.CurrentPlayer != null)
             {
@@ -58,14 +52,14 @@ namespace MobileApp.Views
                     new RowDefinition {Height = 10}
                 }
             };
-       
-         
+
+
 
             StackLayout stackLayout = new StackLayout
             {
                 Margin = new Thickness(20, 0, 20, 0),
                 Padding = new Thickness(0, 70, 0, 0)
-                
+
             };
 
             Label labelCampaign = new Label
@@ -75,8 +69,8 @@ namespace MobileApp.Views
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
-            
-     
+
+
             Label labelExperience = new Label
             {
                 Text = $"Experience Level: {App.CurrentDM.ExperienceLevel}",
@@ -176,7 +170,7 @@ namespace MobileApp.Views
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
-          
+
             Label labelClass = new Label
             {
                 Text = $"Class: {App.CurrentPlayer.Class}",
@@ -239,7 +233,7 @@ namespace MobileApp.Views
             stackLayout.Children.Add(button);
 
             Grid.SetRow(stackLayout, 1);
-           
+
             ProfileGrid.Children.Add(stackLayout);
         }
 

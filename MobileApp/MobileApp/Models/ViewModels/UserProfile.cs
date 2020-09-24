@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MobileApp.Models.ViewModels
+﻿namespace MobileApp.Models.ViewModels
 {
     public class UserProfile
     {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MobileApp.Models.DTOs
+﻿namespace MobileApp.Models.DTOs
 {
     public class RequestDTO
     {

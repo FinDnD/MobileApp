@@ -1,8 +1,5 @@
-﻿using System;
+﻿using MobileApp.Models.DTOs;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using MobileApp.Views;
-using MobileApp.Models.DTOs;
 
 namespace MobileApp
 {

@@ -1,16 +1,12 @@
 ﻿using MLToolkit.Forms.SwipeCardView.Core;
-using MobileApp.Models;
 using MobileApp.Models.DTOs;
 using MobileApp.Models.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -58,7 +54,7 @@ namespace MobileApp.Views
                 }
                 _Requests = App.CurrentPlayer.ActiveRequests;
             }
-            
+
             // If the Current User has a Dungeon Master assigned to them, the Profiles will be built off of the Players in their ActiveRequests list
             else
             {
@@ -129,7 +125,7 @@ namespace MobileApp.Views
             if (request.PlayerAccepted && request.DungeonMasterAccepted)
             {
                 await HandleUpdatingProfile();
-                if(App.CurrentPlayer != null)
+                if (App.CurrentPlayer != null)
                 {
                     await DisplayAlert("Matched!", "A whole new party awaits!", "X");
                 }

@@ -1,9 +1,4 @@
 ﻿using MobileApp.Models.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -42,7 +37,7 @@ namespace MobileApp.Views
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
-            
+
             Label labelCharacterName = new Label
             {
                 Text = $"Character Name: {partyPlayer.CharacterName}",
@@ -74,7 +69,7 @@ namespace MobileApp.Views
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 Margin = new Thickness(10, 10, 0, 10)
             };
-         
+
 
             stackLayout.Children.Add(labelUserEmail);
             stackLayout.Children.Add(labelCharacterName);
@@ -84,6 +79,6 @@ namespace MobileApp.Views
             ProfileStack.Children.Add(stackLayout);
         }
 
-      
+
     }
 }
